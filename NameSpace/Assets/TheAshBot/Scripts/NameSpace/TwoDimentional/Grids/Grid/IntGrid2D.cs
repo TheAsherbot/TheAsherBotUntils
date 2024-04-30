@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TheAshBot.TwoDimentional.Grids
+namespace TheAshBot.TwoDimensional.Grids
 {
     public class IntGrid2D : Grid2D
     {

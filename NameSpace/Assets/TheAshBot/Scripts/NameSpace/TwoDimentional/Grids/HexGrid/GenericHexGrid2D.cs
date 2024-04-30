@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 
 using UnityEngine;
 
-namespace TheAshBot.TwoDimentional.Grids
+namespace TheAshBot.TwoDimensional.Grids
 {
     public class GenericHexGrid2D<TGridObject> : HexGrid2D
     {

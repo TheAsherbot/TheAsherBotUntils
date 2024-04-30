@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TheAshBot.TwoDimentional.TopDownCharcterMovement
+namespace TheAshBot.TwoDimensional.TopDownCharcterMovement
 {
     public class TopDownCharcterMovement2D : MonoBehaviour
     {

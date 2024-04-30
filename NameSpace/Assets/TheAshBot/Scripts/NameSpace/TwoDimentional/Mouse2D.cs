@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace TheAshBot.TwoDimentional
+namespace TheAshBot.TwoDimensional
 {
     public static class Mouse2D
     {

@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 
 using UnityEngine;
 
-using TheAshBot.TwoDimentional;
+using TheAshBot.TwoDimensional;
 using TMPro;
 
 namespace TheAshBot.WorldUI

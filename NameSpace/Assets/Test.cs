@@ -1,18 +1,41 @@
 using TheAshBot;
+using TheAshBot.TwoDimensional.SideViewCharacterMovement;
 
 using UnityEngine;
 
 public class Test : MonoBehaviour
 {
+    IHorizontalMoveVelocity2D horizontalMoveVelocity2D;
+
     private void Start()
     {
-        Debug.Log("Use this to log anything");
-        this.Log("Use this to log anything");
-        Debug.Log("Use this to log successes");
-        this.LogSuccess("Use this to log successes");
-        Debug.LogWarning("Use this to log warnings");
-        this.LogWarning("Use this to log warnings");
-        Debug.LogError("Use this to log errors");
-        this.LogError("Use this to log errors");
+
+        horizontalMoveVelocity2D = GetComponent<IHorizontalMoveVelocity2D>();
     }
+
+
+
+    private void Update()
+    {
+        Application.targetFrameRate = 60;
+        float horizontalVelocity = 0;
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            horizontalVelocity--;
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            horizontalVelocity++;
+        }
+
+        horizontalMoveVelocity2D.SetHorizontalVelocity(horizontalVelocity);
+
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GetComponent<IJumpVelocity2D>().Jump();
+        }
+
+    }
+
 }

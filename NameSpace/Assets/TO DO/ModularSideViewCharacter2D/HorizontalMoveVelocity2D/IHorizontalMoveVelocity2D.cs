@@ -1,4 +1,4 @@
-namespace TheAshBot.TwoDimentional.SideViewCharcterMovement
+namespace TheAshBot.TwoDimensional.SideViewCharacterMovement
 {
     public interface IHorizontalMoveVelocity2D
     {

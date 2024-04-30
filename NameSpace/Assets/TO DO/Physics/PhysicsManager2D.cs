@@ -91,6 +91,15 @@ public class PhysicsManager2D : MonoBehaviour
 
         GroundCheck();
 
+        if (movement.x == 0)
+        {
+            velocity = new Vector2(0, velocity.y);
+        }
+        if (movement.y == 0)
+        {
+            velocity = new Vector2(velocity.x, 0);
+        }
+
         if (useDrag)
         {
             // Drag
@@ -114,6 +123,20 @@ public class PhysicsManager2D : MonoBehaviour
     public void ResetGravity()
     {
         gravity = 0;
+    }
+
+    public void AddForce(Vector2 force)
+    {
+        velocity += force;
+    }
+    public void AddForce(Vector2 force, float maxMagnitude)
+    {
+        velocity += force;
+
+        if (velocity.magnitude > maxMagnitude)
+        {
+            velocity *= maxMagnitude / velocity.magnitude;
+        }
     }
 
 

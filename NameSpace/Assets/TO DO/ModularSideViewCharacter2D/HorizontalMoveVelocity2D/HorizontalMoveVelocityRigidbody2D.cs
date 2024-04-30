@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TheAshBot.TwoDimentional.SideViewCharcterMovement
+namespace TheAshBot.TwoDimensional.SideViewCharacterMovement
 {
     public class HorizontalMoveVelocityRigidbody2D : MonoBehaviour, IHorizontalMoveVelocity2D
     {

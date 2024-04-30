@@ -1,4 +1,4 @@
-using TheAshBot.TwoDimentional;
+using TheAshBot.TwoDimensional;
 
 using UnityEngine;
 

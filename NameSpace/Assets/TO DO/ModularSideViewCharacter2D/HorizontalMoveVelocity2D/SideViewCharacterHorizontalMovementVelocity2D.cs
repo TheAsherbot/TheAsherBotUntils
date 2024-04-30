@@ -1,19 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-
-using UnityEditor.Tilemaps;
-
 using UnityEngine;
 
-namespace TheAshBot.TwoDimentional.SideViewCharcterMovement
+namespace TheAshBot.TwoDimensional.SideViewCharacterMovement
 {
-    public class SideViewCharcterHorizontalMovementVelocity2D : MonoBehaviour, IHorizontalMoveVelocity2D
+    public class SideViewCharacterHorizontalMovementVelocity2D : MonoBehaviour, IHorizontalMoveVelocity2D
     {
 
 
         public enum MovementType
         {
-            Transfrom,
+            Transform,
             Rigidbody,
             PhysicsManager,
         }
@@ -33,27 +28,19 @@ namespace TheAshBot.TwoDimentional.SideViewCharcterMovement
         {
             switch (movementType)
             {
-                case MovementType.Transfrom:
+                case MovementType.Transform:
                     transform.position += new Vector3(horizontalVelocity * movementSpeed * Time.deltaTime, 0);
                     break;
                 case MovementType.PhysicsManager:
                     if (physicsManager == null) AddSetPhysicsManager();
                     physicsManager.velocity = new Vector2(horizontalVelocity * movementSpeed, physicsManager.velocity.y);
                     break;
-            }
-        }
-
-        private void FixedUpdate()
-        {
-            switch (movementType)
-            {
                 case MovementType.Rigidbody:
                     if (rigidbody == null) AddSetRigidBody();
                     rigidbody.velocity = new Vector2(horizontalVelocity * movementSpeed, rigidbody.velocity.y);
                     break;
             }
         }
-
 
         public void SetHorizontalVelocity(float horizontalVelocity)
         {

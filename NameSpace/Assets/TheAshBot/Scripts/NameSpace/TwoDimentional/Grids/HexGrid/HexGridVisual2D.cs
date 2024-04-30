@@ -2,7 +2,7 @@ using TheAshBot.Meshes;
 
 using UnityEngine;
 
-namespace TheAshBot.TwoDimentional.Grids
+namespace TheAshBot.TwoDimensional.Grids
 {
     public class HexGridVisual2D : MonoBehaviour
     {

@@ -644,7 +644,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 1.5, y: 2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1078,8 +1078,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2130978353}
   - component: {fileID: 2130978365}
-  - component: {fileID: 2130978366}
+  - component: {fileID: 2130978368}
   - component: {fileID: 2130978367}
+  - component: {fileID: 2130978366}
+  - component: {fileID: 2130978369}
   m_Layer: 3
   m_Name: Testing
   m_TagString: Untagged
@@ -1155,7 +1157,59 @@ MonoBehaviour:
   m_GameObject: {fileID: 2130978350}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1a951e8ad3107c44972489d07328fa0, type: 3}
+  m_Script: {fileID: 11500000, guid: 85efb361035783f4abe0237731d17d20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementType: 0
+--- !u!114 &2130978368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130978350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d583fdcd16f36344fb8062db2ecb8516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementType: 2
+  movementSpeed: 5
+--- !u!114 &2130978369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130978350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7138e2824567c444a552dfdb8208330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementType: 2
+  jumpHeight: 10
+  jumpPath:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jumpTime: 0
