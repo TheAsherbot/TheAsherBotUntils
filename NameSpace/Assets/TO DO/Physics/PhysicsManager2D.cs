@@ -3,7 +3,10 @@ using System.Linq;
 
 using TheAshBot;
 
+using Unity.VisualScripting;
+
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PhysicsManager2D : MonoBehaviour
 {
@@ -49,7 +52,8 @@ public class PhysicsManager2D : MonoBehaviour
     [Header("Ground Check")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float yOffset = 0;
-    [SerializeField] private float groundCheckWidth= 0.05f;
+    [SerializeField] private float groundCheckDistance = 0.025f;
+    [SerializeField] private float GroundCheckScale = 0.9f;
 
     private bool hadCheckedIsGroundedThisFrame;
 
@@ -63,7 +67,7 @@ public class PhysicsManager2D : MonoBehaviour
     [SerializeField] private float maxSlopeAngle = 55;
 
     private float skinWidth = 0.015f;
-    private int maxBounces = 5;
+    private int maxBounces = 100;
     private Bounds bounds;
 
 
@@ -88,8 +92,6 @@ public class PhysicsManager2D : MonoBehaviour
         bounds.Expand(-2 * skinWidth);
 
         ApplyMovement();
-
-        GroundCheck();
 
         if (movement.x == 0)
         {
@@ -242,6 +244,7 @@ public class PhysicsManager2D : MonoBehaviour
     {
         if (depth >= maxBounces)
         {
+            this.Log("HIT MAX!");
             return Vector3.zero;
         }
 
@@ -262,6 +265,7 @@ public class PhysicsManager2D : MonoBehaviour
             // normal Ground / Slope
             if (angle <= maxSlopeAngle)
             {
+                this.Log("Hit the Ground or Slope");
                 if (gravityPass)
                 {
                     return snapToSurface;
@@ -271,10 +275,11 @@ public class PhysicsManager2D : MonoBehaviour
             // Wall or Steep slope
             else
             {
+                this.Log("Hit Wall or step");
                 // 3D
                 float scale = 1 - Vector3.Dot(new Vector3(rayCastHit.normal.x, 0/*, rayCastHit.normal.z*/).normalized, -new Vector3(initialVelocity.x, 0 , initialVelocity.z).normalized);
 
-                if (isGrounded && !gravityPass)
+                if (IsGrounded() && !gravityPass)
                 {
                     leftover = ProjectAndScale(new Vector3(leftover.x, 0, leftover.z), new Vector3(rayCastHit.normal.x, 0/*, rayCastHit.normal.z*/));
                 }
@@ -335,23 +340,36 @@ public class PhysicsManager2D : MonoBehaviour
 
     private void GroundCheck()
     {
-        float boxCastDistance = 0.01f;
+        float size = bounds.extents.x * GroundCheckScale;
+        float distance = groundCheckDistance;
 
-        isGroundedLast = isGrounded;
+        RaycastHit2D rayCastHit = Physics2D.CircleCast(new Vector2(transform.position.x, transform.position.y + yOffset), size, Vector2.down, distance, groundLayer);
+        if (rayCastHit.transform != null)
+        {
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
+        }
 
-        RaycastHit2D rayCastHit = Physics2D.BoxCast(transform.position - new Vector3(0, yOffset - 0.0f), new Vector2(groundCheckWidth * 2, 0.001f), 0, Vector2.down, boxCastDistance, groundLayer);
-
-        isGrounded = rayCastHit.transform != null;
-        hadCheckedIsGroundedThisFrame = true;
 
 #if UNITY_EDITOR
         if (showGismos)
         {
             Color rayColor = isGrounded ? Color.green : Color.red;
 
-            Debug.DrawRay(transform.position + new Vector3(groundCheckWidth, 0), Vector2.down * ((yOffset / 2) + boxCastDistance), rayColor);
-            Debug.DrawRay(transform.position - new Vector3(groundCheckWidth, 0), Vector2.down * ((yOffset / 2) + boxCastDistance), rayColor);
-            Debug.DrawRay(transform.position - new Vector3(groundCheckWidth, yOffset + boxCastDistance), 2 * groundCheckWidth * Vector2.right, rayColor);
+            Vector3 origin = new Vector3(transform.position.x, transform.position.y + yOffset - distance);
+            Vector3 length = Vector3.up * size;
+            Debug.DrawLine(origin, origin - length, rayColor);
+            Vector2 lastPosition = origin + length;
+            Vector2 currentPosition;
+            for (int i = 0; i < 360; i++)
+            {
+                currentPosition = origin + (Quaternion.AngleAxis(i, Vector3.forward) * length);
+                Debug.DrawLine(lastPosition, currentPosition);
+                lastPosition = currentPosition;
+            }
         }
 #endif
     }
