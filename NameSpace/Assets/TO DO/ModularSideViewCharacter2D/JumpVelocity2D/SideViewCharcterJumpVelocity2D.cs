@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SideViewCharcterJumpVelocity2D : MonoBehaviour, IJumpVelocity2D
+public class SideViewCharacterJumpVelocity2D : MonoBehaviour, IJumpVelocity2D
 {
 
 
@@ -41,7 +41,7 @@ public class SideViewCharcterJumpVelocity2D : MonoBehaviour, IJumpVelocity2D
 
                 float percentageComplete = elapsedJumpTime / jumpTime;
 
-                transform.position = new Vector3(0, startJumpHeight + jumpPath.Evaluate(percentageComplete) * jumpHeight);
+                transform.position = new Vector3(0, startJumpHeight + (jumpPath.Evaluate(percentageComplete) * jumpHeight));
             }
         }
     }
@@ -61,11 +61,19 @@ public class SideViewCharcterJumpVelocity2D : MonoBehaviour, IJumpVelocity2D
                 isJumping = true;
                 break;
             case MovementType.PhysicsManager:
-                if (physicsManager == null) AddSetPhysicsManager();
+                if (physicsManager == null)
+                {
+                    AddSetPhysicsManager();
+                }
+
                 physicsManager.AddForce(new Vector2(0, jumpHeight));
                 break;
             case MovementType.Rigidbody:
-                if (rigidbody == null) AddSetRigidBody();
+                if (rigidbody == null)
+                {
+                    AddSetRigidBody();
+                }
+
                 rigidbody.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
                 break;
         }

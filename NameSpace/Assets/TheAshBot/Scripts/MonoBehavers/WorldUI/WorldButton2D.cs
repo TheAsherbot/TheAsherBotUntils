@@ -6,7 +6,6 @@ using Sirenix.OdinInspector;
 
 using UnityEngine;
 
-using TheAshBot.TwoDimensional;
 using TMPro;
 
 namespace TheAshBot.WorldUI
@@ -37,7 +36,7 @@ namespace TheAshBot.WorldUI
 
         public static WorldButton2D Create(Vector2 position, Vector2 size, Sprite sprite, WorldButton2D baseWorldButton2D, Text text, string name)
         {
-            // making the Gameobject
+            // making the GameObject
             GameObject buttonGameObject = new GameObject(name);
             buttonGameObject.transform.position = (Vector3)position + new Vector3(0, 0, 1);
             buttonGameObject.transform.localScale = size;
@@ -63,7 +62,7 @@ namespace TheAshBot.WorldUI
             if (baseWorldButton2D == null)
             {
                 buttonWorldButton2D.colorVisualization = ColorVisualization.SetColor;
-                buttonWorldButton2D.defualtColor = Color.HSVToRGB(1f / 3f, 0.7f, 0.7f);
+                buttonWorldButton2D.defaultColor = Color.HSVToRGB(1f / 3f, 0.7f, 0.7f);
                 buttonWorldButton2D.mouseOverUIColor = Color.HSVToRGB(1f / 3f, 0.7f, 0.65f);
                 buttonWorldButton2D.holdingMouseDownOverUIColor = Color.HSVToRGB(1f / 3f, 0.7f, 0.5f);
             }
@@ -75,7 +74,7 @@ namespace TheAshBot.WorldUI
                 buttonWorldButton2D.OnMouseEndClickUI = baseWorldButton2D.OnMouseEndClickUI;
 
                 buttonWorldButton2D.colorVisualization = baseWorldButton2D.colorVisualization;
-                buttonWorldButton2D.defualtColor = baseWorldButton2D.defualtColor;
+                buttonWorldButton2D.defaultColor = baseWorldButton2D.defaultColor;
                 buttonWorldButton2D.mouseOverUIColor = baseWorldButton2D.mouseOverUIColor;
                 buttonWorldButton2D.holdingMouseDownOverUIColor = baseWorldButton2D.holdingMouseDownOverUIColor;
             }
@@ -90,7 +89,7 @@ namespace TheAshBot.WorldUI
                 GameObject textGameObject = new GameObject(text.name);
                 textGameObject.transform.parent = buttonGameObject.transform;
 
-                RectTransform textRectTransfrom = textGameObject.AddComponent<RectTransform>();
+                RectTransform textRectTransform = textGameObject.AddComponent<RectTransform>();
                 TextMeshPro textTextMeshPro = textGameObject.AddComponent<TextMeshPro>();
 
                 textTextMeshPro.enableWordWrapping = text.woodWrap;
@@ -107,9 +106,9 @@ namespace TheAshBot.WorldUI
                     textTextMeshPro.fontMaterial = text.fontMaterial;
                 }
 
-                textRectTransfrom.SetGlobalScale(text.scale);
-                textRectTransfrom.sizeDelta = text.size;
-                textRectTransfrom.localPosition = text.position;
+                textRectTransform.SetGlobalScale(text.scale);
+                textRectTransform.sizeDelta = text.size;
+                textRectTransform.localPosition = text.position;
             }
 
 
@@ -207,9 +206,6 @@ namespace TheAshBot.WorldUI
 
         #region Variables
 
-        [ReadOnlyText(height = 110, yOffset = 40), SerializeField]
-        private string textLable1 = "Make sure this GameObject is +1 unit on the Z.";
-
 #if ODIN_INSPECTOR
         #region ODIN_INSPECTOR
         public event Action OnMouseEnterUI;
@@ -230,7 +226,7 @@ namespace TheAshBot.WorldUI
         [EnumToggleButtons()]
         public ColorVisualization colorVisualization;
         [HideIf("@colorVisualization == ColorVisualization.None")]
-        public Color defualtColor = Color.white;
+        public Color defaultColor = Color.white;
         [HideIf("@colorVisualization == ColorVisualization.None")]
         public Color mouseOverUIColor = Color.white;
         [HideIf("@colorVisualization == ColorVisualization.None")]
@@ -253,7 +249,7 @@ namespace TheAshBot.WorldUI
 
         [Header("ColorVisualization")]
         public ColorVisualization colorVisualization;
-        public Color defualtColor = Color.white;
+        public Color defaultColor = Color.white;
         public Color mouseOverUIColor = Color.white;
         public Color holdingMouseDownOverUIColor = Color.white;
 
@@ -264,14 +260,6 @@ namespace TheAshBot.WorldUI
         [SerializeField] private TextMeshProUGUI text;
         private Material startMaterial;
 
-
-        #region Mouse State Variables
-
-        private bool isMouseUnobstructedOverButton;
-        private bool isMouseUnobstructedOverButtonLate;
-        private bool isMouseOverButton;
-
-        #endregion
 
         #endregion
 
@@ -300,38 +288,11 @@ namespace TheAshBot.WorldUI
             {
                 startMaterial = buttonMeshRenderer.material;
             }
-        }
 
-        private void Update()
-        {
-            if (isMouseOverButton)
-            {
-                if (Mouse2D.TryGetObjectAtMousePosition(out GameObject hit) && hit == gameObject)
-                {
-                    isMouseUnobstructedOverButton = true;
-                }
-                else
-                {
-                    isMouseUnobstructedOverButton = false;
-                }
-            }
-
-            if (isMouseUnobstructedOverButton && !isMouseUnobstructedOverButtonLate)
-            {
-                // Mouse just Entered Button
-                isMouseUnobstructedOverButtonLate = true;
-                OnMouseEnterUI?.Invoke();
-
-                SetColor_MouseOverUIColor();
-            }
-            else if (!isMouseUnobstructedOverButton && isMouseUnobstructedOverButtonLate)
-            {
-                // Mouse just Exited Button
-                isMouseUnobstructedOverButtonLate = false;
-                OnMouseExitUI?.Invoke();
-
-                SetColor_DefualtColor();
-            }
+            OnMouseEnterUI += SetColor_MouseOverUIColor;
+            OnMouseStartClickUI += SetColor_HoldingMouseDownOverUIColor;
+            OnMouseEndClickUI += SetColor_MouseOverUIColor;
+            OnMouseExitUI += SetColor_DefaultColor;
         }
 
         #endregion
@@ -341,33 +302,22 @@ namespace TheAshBot.WorldUI
 
         private void OnMouseEnter()
         {
-            isMouseOverButton = true;
+            OnMouseEnterUI?.Invoke();
         }
 
         private void OnMouseDown()
         {
-            if (isMouseUnobstructedOverButton)
-            {
-                OnMouseStartClickUI?.Invoke();
-
-                SetColor_HoldingMouseDownOverUIColor();
-            }
+            OnMouseStartClickUI?.Invoke();
         }
 
         private void OnMouseUpAsButton()
         {
-            if (isMouseUnobstructedOverButton)
-            {
-                OnMouseEndClickUI?.Invoke();
-
-                SetColor_MouseOverUIColor();
-            }
+            OnMouseEndClickUI?.Invoke();
         }
 
         private void OnMouseExit()
         {
-            isMouseOverButton = false;
-            isMouseUnobstructedOverButton = false;
+            OnMouseExitUI?.Invoke();
         }
 
         #endregion
@@ -409,13 +359,16 @@ namespace TheAshBot.WorldUI
         #region Set Color
 
         /// <summary>
-        /// sets the color of the renderer to be the defualt color.
+        /// sets the color of the renderer to be the default color.
         /// </summary>
-        private void SetColor_DefualtColor()
+        private void SetColor_DefaultColor()
         {
-            if (renderType == RenderType.None || colorVisualization == ColorVisualization.None) return;
+            if (renderType == RenderType.None || colorVisualization == ColorVisualization.None)
+            {
+                return;
+            }
 
-            SetColor(defualtColor);
+            SetColor(defaultColor);
         }
 
         /// <summary>
@@ -423,7 +376,10 @@ namespace TheAshBot.WorldUI
         /// </summary>
         private void SetColor_MouseOverUIColor()
         {
-            if (renderType == RenderType.None || colorVisualization == ColorVisualization.None) return;
+            if (renderType == RenderType.None || colorVisualization == ColorVisualization.None)
+            {
+                return;
+            }
 
             SetColor(mouseOverUIColor);
         }
@@ -433,7 +389,10 @@ namespace TheAshBot.WorldUI
         /// </summary>
         private void SetColor_HoldingMouseDownOverUIColor()
         {
-            if (renderType == RenderType.None || colorVisualization == ColorVisualization.None) return;
+            if (renderType == RenderType.None || colorVisualization == ColorVisualization.None)
+            {
+                return;
+            }
 
             SetColor(holdingMouseDownOverUIColor);
         }

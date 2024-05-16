@@ -9,8 +9,6 @@ namespace TheAshBot.TwoDimensional.Grids
 
 
         private const int TEXTURE_WIDTH = 64;
-        private const int TEXTURE_HEIGHT = 1;
-
 
         private bool updateMesh;
 
@@ -58,7 +56,7 @@ namespace TheAshBot.TwoDimensional.Grids
             {
                 for (int y = 0; y < grid.GetHeight(); y++)
                 {
-                    int index = x * grid.GetHeight() + y;
+                    int index = (x * grid.GetHeight()) + y;
 
                     float gridValue = grid.GetValueNormalized(x, y);
 

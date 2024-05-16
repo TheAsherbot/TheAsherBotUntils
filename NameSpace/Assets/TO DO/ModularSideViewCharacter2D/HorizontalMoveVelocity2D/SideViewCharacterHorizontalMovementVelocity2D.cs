@@ -32,11 +32,18 @@ namespace TheAshBot.TwoDimensional.SideViewCharacterMovement
                     transform.position += new Vector3(horizontalVelocity * movementSpeed * Time.deltaTime, 0);
                     break;
                 case MovementType.PhysicsManager:
-                    if (physicsManager == null) AddSetPhysicsManager();
+                    if (physicsManager == null)
+                    {
+                        AddSetPhysicsManager();
+                    }
+
                     physicsManager.velocity = new Vector2(horizontalVelocity * movementSpeed, physicsManager.velocity.y);
                     break;
                 case MovementType.Rigidbody:
-                    if (rigidbody == null) AddSetRigidBody();
+                    if (rigidbody == null)
+                    {
+                        AddSetRigidBody();
+                    }
                     rigidbody.velocity = new Vector2(horizontalVelocity * movementSpeed, rigidbody.velocity.y);
                     break;
             }

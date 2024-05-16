@@ -1,4 +1,3 @@
-using TheAshBot;
 using TheAshBot.TwoDimensional.SideViewCharacterMovement;
 
 using UnityEngine;

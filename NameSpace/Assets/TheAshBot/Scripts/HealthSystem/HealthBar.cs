@@ -1,4 +1,4 @@
-using TheAshBot.MonoBehaviours;
+using TheAshBot.MonoBehaviors;
 
 using UnityEngine;
 
@@ -37,11 +37,11 @@ namespace TheAshBot.HealthBarSystem
                 GameObject borderGameObject = new GameObject("Border", typeof(SpriteRenderer));
                 borderGameObject.transform.SetParent(contentGameObject.transform);
                 borderGameObject.transform.localPosition = Vector3.zero;
-                borderGameObject.transform.localScale = size + Vector2.one * border.thickness;
+                borderGameObject.transform.localScale = size + (Vector2.one * border.thickness);
                 borderGameObject.GetComponent<SpriteRenderer>().color = border.color;
                 borderGameObject.GetComponent<SpriteRenderer>().sprite = AssetReferences.Instance.SinglePixelSprite;
                 RendererSortingOrderSorter borderRendererSortingOrderSorter = borderGameObject.AddComponent<RendererSortingOrderSorter>();
-                borderGameObject.gameObject.layer = layer;
+                borderGameObject.layer = layer;
                 borderRendererSortingOrderSorter.offset = -40;
             }
 
@@ -53,7 +53,7 @@ namespace TheAshBot.HealthBarSystem
             backgroundGameObject.GetComponent<SpriteRenderer>().color = backgroundColor;
             backgroundGameObject.GetComponent<SpriteRenderer>().sprite = AssetReferences.Instance.SinglePixelSprite;
             RendererSortingOrderSorter backgroundRendererSortingOrderSorter = backgroundGameObject.AddComponent<RendererSortingOrderSorter>();
-            backgroundGameObject.gameObject.layer = layer;
+            backgroundGameObject.layer = layer;
             backgroundRendererSortingOrderSorter.offset = -50;
 
             // Bar
@@ -69,17 +69,17 @@ namespace TheAshBot.HealthBarSystem
             barSpriteGameObject.GetComponent<SpriteRenderer>().color = barColor;
             barSpriteGameObject.GetComponent<SpriteRenderer>().sprite = AssetReferences.Instance.SinglePixelSprite;
             RendererSortingOrderSorter barSpriteRendererSortingOrderSorter = barSpriteGameObject.AddComponent<RendererSortingOrderSorter>();
-            barSpriteGameObject.gameObject.layer = layer;
+            barSpriteGameObject.layer = layer;
             barSpriteRendererSortingOrderSorter.offset = -60;
 
 
-            // Added more Compents
+            // Added more Components
             foreach (Component component in addComponents)
             {
                 healthBarGameObject.CopyComponent(component);
             }
 
-            // Adding components to the new gameobject 
+            // Adding components to the new Game Object
             HealthBar healthBar = healthBarGameObject.AddComponent<HealthBar>();
             HealthSystem healthSystem = new HealthSystem(maxHealth);
             healthBar.SetUp(healthSystem, offset, fallow, barGameObject.transform, healthBarGameObject, contentGameObject, hideWhenFull, fallow != null);
@@ -98,7 +98,7 @@ namespace TheAshBot.HealthBarSystem
 
 
         private bool hideWhenFull;
-        private bool useFallowTransfrom;
+        private bool useFallowTransform;
         private Vector3 offset;
         private Transform bar;
         private Transform fallow;
@@ -110,16 +110,19 @@ namespace TheAshBot.HealthBarSystem
 
         private void LateUpdate()
         {
-            if (!useFallowTransfrom || fallow == null) return;
+            if (!useFallowTransform || fallow == null)
+            {
+                return;
+            }
 
             transform.position = fallow.position + offset;
         }
 
         private void SetUp(HealthSystem healthSystem, Vector3 offset, Transform fallow, Transform bar, 
-            GameObject healthBarGameObject, GameObject contentGameObject, bool hideWhenFull, bool useFallowTransfrom)
+            GameObject healthBarGameObject, GameObject contentGameObject, bool hideWhenFull, bool useFallowTransform)
         {
             this.hideWhenFull = hideWhenFull;
-            this.useFallowTransfrom = useFallowTransfrom;
+            this.useFallowTransform = useFallowTransform;
             this.offset = offset;
             this.fallow = fallow;
             this.bar = bar;

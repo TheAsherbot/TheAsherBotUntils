@@ -5,7 +5,7 @@ public class JumpVelocityPhysicsManager2D : MonoBehaviour, IJumpVelocity2D
 
     [SerializeField] private float jumpHeight;
 
-    private new PhysicsManager2D physicsManager;
+    private PhysicsManager2D physicsManager;
 
 
 

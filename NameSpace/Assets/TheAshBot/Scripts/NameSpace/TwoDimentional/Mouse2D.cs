@@ -27,20 +27,20 @@ namespace TheAshBot.TwoDimensional
         #region Normal
 
         /// <summary>
-        /// This will try to get a gameobject at the mouse World Position.
+        /// This will try to get a Game Object at the mouse World Position.
         /// </summary>
         /// <param name="camera">This is the camera that it takes the mouse position from.</param>
-        /// <param name="hit">This is th gameobject that the mouse is over.</param>
-        /// <returns>true if the mosue is over a gameobject.</returns>
+        /// <param name="hit">This is th Game Object that the mouse is over.</param>
+        /// <returns>true if the mouse is over a Game Object .</returns>
         public static bool TryGetObjectAtMousePosition(Camera camera, out GameObject hit)
         {
             Ray ray = camera.ScreenPointToRay(MousePosition);
 
-            RaycastHit2D raycastHit = Physics2D.Raycast(ray.origin, ray.direction);
+            RaycastHit2D rayCastHit = Physics2D.Raycast(ray.origin, ray.direction);
 
-            if (raycastHit.transform != null)
+            if (rayCastHit.transform != null)
             {
-                hit = raycastHit.transform.gameObject;
+                hit = rayCastHit.transform.gameObject;
                 return true;
             }
             
@@ -49,10 +49,10 @@ namespace TheAshBot.TwoDimensional
         }
 
         /// <summary>
-        /// This will try to get a gameobject at the mouse World Position. 
+        /// This will try to get a Game Object  at the mouse World Position. 
         /// </summary>
-        /// <param name="hit">This is th gameobject that the mouse is over.</param>
-        /// <returns>true if the mosue is over a gameobject.</returns>
+        /// <param name="hit">This is th Game Object  that the mouse is over.</param>
+        /// <returns>true if the mouse is over a Game Object .</returns>
         public static bool TryGetObjectAtMousePosition(out GameObject hit)
         {
             return TryGetObjectAtMousePosition(Camera.main, out hit);
@@ -63,23 +63,23 @@ namespace TheAshBot.TwoDimensional
         #region Ingore Component
 
         /// <summary>
-        /// This will try to get a gameobject at the mouse World Position that does not has a component.
+        /// This will try to get a game object at the mouse World Position that does not has a component.
         /// </summary>
-        /// <typeparam name="T">This is the compentent it ingores</typeparam>
+        /// <typeparam name="T">This is the competent it ignores</typeparam>
         /// <param name="camera">This is the camera that it takes the mouse position from.</param>
-        /// <param name="hit">This is th gameobject that the mouse is over.</param>
-        /// <returns>true if the mosue is over a gameobject.</returns>
-        public static bool TryGetObjectAtMousePositionIngoreComponent<T>(Camera camera, out GameObject hit) where T : Component
+        /// <param name="hit">This is th Game Object that the mouse is over.</param>
+        /// <returns>true if the mouse is over a Game Object .</returns>
+        public static bool TryGetObjectAtMousePositionIgnoreComponent<T>(Camera camera, out GameObject hit) where T : Component
         {
             Ray ray = camera.ScreenPointToRay(MousePosition);
 
-            RaycastHit2D[] raycastHitArray = Physics2D.RaycastAll(ray.origin, ray.direction);
+            RaycastHit2D[] rayCastHitArray = Physics2D.RaycastAll(ray.origin, ray.direction);
 
-            foreach (RaycastHit2D raycastHit in raycastHitArray)
+            foreach (RaycastHit2D rayCastHit in rayCastHitArray)
             {
-                if (!raycastHit.transform.TryGetComponent(out T t))
+                if (!rayCastHit.transform.TryGetComponent(out T t))
                 {
-                    hit = raycastHit.transform.gameObject;
+                    hit = rayCastHit.transform.gameObject;
                     return true;
                 }
             }
@@ -89,14 +89,14 @@ namespace TheAshBot.TwoDimensional
         }
 
         /// <summary>
-        /// This will try to get a gameobject at the mouse World Position that does not has a component. 
+        /// This will try to get a Game Object at the mouse World Position that does not has a component. 
         /// </summary>
-        /// <typeparam name="T">This is the compentent it ingores</typeparam>
-        /// <param name="hit">This is th gameobject that the mouse is over.</param>
-        /// <returns>true if the mosue is over a gameobject.</returns>
-        public static bool TryGetObjectAtMousePositionIngoreComponent<T>(out GameObject hit) where T : Component
+        /// <typeparam name="T">This is the competent it ignores</typeparam>
+        /// <param name="hit">This is th Game Object that the mouse is over.</param>
+        /// <returns>true if the mouse is over a Game Object.</returns>
+        public static bool TryGetObjectAtMousePositionIgnoreComponent<T>(out GameObject hit) where T : Component
         {
-            return TryGetObjectAtMousePositionIngoreComponent<T>(Camera.main, out hit);
+            return TryGetObjectAtMousePositionIgnoreComponent<T>(Camera.main, out hit);
         }
 
         #endregion
@@ -104,23 +104,23 @@ namespace TheAshBot.TwoDimensional
         #region With Component
 
         /// <summary>
-        /// This will try to get a gameobject at the mouse World Position that has a component.
+        /// This will try to get a Game Object at the mouse World Position that has a component.
         /// </summary>
         /// <typeparam name="T">This is the component that it has to have</typeparam>
         /// <param name="camera">This is the camera that it takes the mouse position from.</param>
-        /// <param name="hit">This is th gameobject that the mouse is over.</param>
-        /// <returns>true if the mosue is over a gameobject.</returns>
+        /// <param name="hit">This is th Game Object that the mouse is over.</param>
+        /// <returns>true if the mouse is over a Game Object .</returns>
         public static bool TryGetObjectAtMousePositionWithComponent<T>(Camera camera, out GameObject hit) where T : Component
         {
             Ray ray = camera.ScreenPointToRay(MousePosition);
 
-            RaycastHit2D[] raycastHitArray = Physics2D.RaycastAll(ray.origin, ray.direction);
+            RaycastHit2D[] rayCastHitArray = Physics2D.RaycastAll(ray.origin, ray.direction);
 
-            foreach (RaycastHit2D raycastHit in raycastHitArray)
+            foreach (RaycastHit2D rayCastHit in rayCastHitArray)
             {
-                if (raycastHit.transform.TryGetComponent(out T t))
+                if (rayCastHit.transform.TryGetComponent(out T t))
                 {
-                    hit = raycastHit.transform.gameObject;
+                    hit = rayCastHit.transform.gameObject;
                     return true;
                 }
             }
@@ -130,15 +130,15 @@ namespace TheAshBot.TwoDimensional
         }
 
         /// <summary>
-        /// This will try to get a gameobject at the mouse World Position that has a component.
+        /// This will try to get a cat the mouse World Position that has a component.
         /// </summary>
         /// <typeparam name="T">This is the component that it has to have</typeparam>
         /// <param name="camera">This is the camera that it takes the mouse position from.</param>
-        /// <param name="hit">This is th gameobject that the mouse is over.</param>
-        /// <returns>true if the mosue is over a gameobject.</returns>
+        /// <param name="hit">This is th Game Object that the mouse is over.</param>
+        /// <returns>true if the mouse is over a Game Object.</returns>
         public static bool TryGetObjectAtMousePositionWithComponent<T>(out GameObject hit) where T : Component
         {
-            return TryGetObjectAtMousePositionIngoreComponent<T>(Camera.main, out hit);
+            return TryGetObjectAtMousePositionIgnoreComponent<T>(Camera.main, out hit);
         }
 
         #endregion
@@ -153,7 +153,7 @@ namespace TheAshBot.TwoDimensional
         /// </summary>
         /// <param name="camera">This is the camera that the it gets the position from</param>
         /// <param name="zPosition">This is the z position</param>
-        /// <returns>This return the mouse posintion</returns>
+        /// <returns>This return the mouse position</returns>
         public static Vector2 GetMousePosition2D(Camera camera, float zPosition)
         {
             Vector3 mouseWorldPosition = camera.ScreenToWorldPoint(MousePosition);
@@ -165,7 +165,7 @@ namespace TheAshBot.TwoDimensional
         /// This gets the mouse position in 2D
         /// </summary>
         /// <param name="camera">This is the camera that the it gets the position from</param>
-        /// <returns>This return the mouse posintion</returns>
+        /// <returns>This return the mouse position</returns>
         public static Vector2 GetMousePosition2D(Camera camera)
         {
             return GetMousePosition2D(camera, 0);
@@ -175,7 +175,7 @@ namespace TheAshBot.TwoDimensional
         /// This gets the mouse position in 2D
         /// </summary>
         /// <param name="zPosition">This is the z position</param>
-        /// <returns>This return the mouse posintion</returns>
+        /// <returns>This return the mouse position</returns>
         public static Vector2 GetMousePosition2D(float zPosition)
         {
             return GetMousePosition2D(Camera.main, zPosition);
@@ -184,7 +184,7 @@ namespace TheAshBot.TwoDimensional
         /// <summary>
         /// This gets the mouse position in 2D
         /// </summary>
-        /// <returns>This return the mouse posintion</returns>
+        /// <returns>This return the mouse position</returns>
         public static Vector2 GetMousePosition2D()
         {
             return GetMousePosition2D(Camera.main, 0);
@@ -240,7 +240,7 @@ namespace TheAshBot.TwoDimensional
         /// </summary>
         /// <param name="camera">This is the camera that the it gets the position from</param>
         /// <param name="zPosition">This is the z position</param>
-        /// <returns>This return the mouse posintion rounded to an Int</returns>
+        /// <returns>This return the mouse position rounded to an Int</returns>
         public static Vector2Int GetMousePositionInt2D(Camera camera, int zPosition)
         {
             return Vector2Int.RoundToInt(GetMousePosition2D(camera, zPosition));
@@ -250,7 +250,7 @@ namespace TheAshBot.TwoDimensional
         /// This gets the mouse position in 2D rounded to an Int
         /// </summary>
         /// <param name="camera">This is the camera that the it gets the position from</param>
-        /// <returns>This return the mouse posintion rounded to an Int</returns>
+        /// <returns>This return the mouse position rounded to an Int</returns>
         public static Vector2Int GetMousePositionInt2D(Camera camera)
         {
             return GetMousePositionInt2D(camera, 0);
@@ -260,7 +260,7 @@ namespace TheAshBot.TwoDimensional
         /// This gets the mouse position in 2D rounded to an Int
         /// </summary>
         /// <param name="zPosition">This is the z position</param>
-        /// <returns>This return the mouse posintion rounded to an Int</returns>
+        /// <returns>This return the mouse position rounded to an Int</returns>
         public static Vector2Int GetMousePositionInt2D(int zPosition)
         {
             return GetMousePositionInt2D(Camera.main, zPosition);
@@ -269,7 +269,7 @@ namespace TheAshBot.TwoDimensional
         /// <summary>
         /// This gets the mouse position in 2D rounded to an Int
         /// </summary>
-        /// <returns>This return the mouse posintion rounded to an Int</returns>
+        /// <returns>This return the mouse position rounded to an Int</returns>
         public static Vector2Int GetMousePositionInt2D()
         {
             return GetMousePositionInt2D(Camera.main, 0);
@@ -278,7 +278,7 @@ namespace TheAshBot.TwoDimensional
 
         #region Debug Log Mouse Position Int
         /// <summary>
-        /// This logs the mouse position in 2D rouned to an Int
+        /// This logs the mouse position in 2D rounded to an Int
         /// </summary>
         /// <param name="camera">This is the camera that the it gets the position from</param>
         /// <param name="zPosition">This is the z position<</param>
@@ -289,7 +289,7 @@ namespace TheAshBot.TwoDimensional
         }
 
         /// <summary>
-        /// THis logs the mouse position in 2D rouned to an Int
+        /// THis logs the mouse position in 2D rounded to an Int
         /// </summary>
         /// <param name="camera">This is the camera that the it gets the position from</param>
         public static void DebugLogMousePositionInt2D(Camera camera)
@@ -298,7 +298,7 @@ namespace TheAshBot.TwoDimensional
         }
 
         /// <summary>
-        /// THis logs the mouse position in 2D rouned to an Int
+        /// THis logs the mouse position in 2D rounded to an Int
         /// </summary>
         /// <param name="zPosition">This is the z position<</param>
         public static void DebugLogMousePositionInt2D(int zPosition)
@@ -307,7 +307,7 @@ namespace TheAshBot.TwoDimensional
         }
 
         /// <summary>
-        /// THis logs the mouse position in 2D rouned to an Int
+        /// THis logs the mouse position in 2D rounded to an Int
         /// </summary>
         public static void DebugLogMousePositionInt2D()
         {
@@ -320,27 +320,27 @@ namespace TheAshBot.TwoDimensional
         #region Is Mouse Over UI
 
         /// <summary>
-        /// This checks to see if the mouse is over UI while ingoring a script.
+        /// This checks to see if the mouse is over UI while ignoring a script.
         /// </summary>
-        /// <typeparam name="T">This is the Component that the is being ingnored.</typeparam>
+        /// <typeparam name="T">This is the Component that the is being ignored.</typeparam>
         /// <returns>true if the mouse is over the UI without the script.</returns>
-        public static bool IsMouseOverUIIngoreComponent<T>() where T : Component
+        public static bool IsMouseOverUIIgnoreComponent<T>() where T : Component
         {
             PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
             pointerEventData.position = MousePosition;
 
-            List<RaycastResult> raycastResultList = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(pointerEventData, raycastResultList);
-            for (int raycastNumber = 0; raycastNumber < raycastResultList.Count; raycastNumber++)
+            List<RaycastResult> rayCastResultList = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerEventData, rayCastResultList);
+            for (int rayCastNumber = 0; rayCastNumber < rayCastResultList.Count; rayCastNumber++)
             {
-                if (raycastResultList[raycastNumber].gameObject.GetComponent<T>() != null)
+                if (rayCastResultList[rayCastNumber].gameObject.GetComponent<T>() != null)
                 {
-                    raycastResultList.RemoveAt(raycastNumber);
-                    raycastNumber--;
+                    rayCastResultList.RemoveAt(rayCastNumber);
+                    rayCastNumber--;
                 }
             }
 
-            return raycastResultList.Count > 0;
+            return rayCastResultList.Count > 0;
         }
         
         /// <summary>
@@ -353,11 +353,11 @@ namespace TheAshBot.TwoDimensional
             PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
             pointerEventData.position = MousePosition;
 
-            List<RaycastResult> raycastResultList = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(pointerEventData, raycastResultList);
-            for (int raycastNumber = 0; raycastNumber < raycastResultList.Count; raycastNumber++)
+            List<RaycastResult> rayCastResultList = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerEventData, rayCastResultList);
+            for (int rayCastNumber = 0; rayCastNumber < rayCastResultList.Count; rayCastNumber++)
             {
-                if (raycastResultList[raycastNumber].gameObject.GetComponent<T>() != null)
+                if (rayCastResultList[rayCastNumber].gameObject.GetComponent<T>() != null)
                 {
                     return true;
                 }

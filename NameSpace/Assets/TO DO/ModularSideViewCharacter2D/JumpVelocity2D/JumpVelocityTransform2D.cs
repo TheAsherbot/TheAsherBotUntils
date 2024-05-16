@@ -25,7 +25,7 @@ public class JumpVelocityTransform2D : MonoBehaviour, IJumpVelocity2D
 
             float percentageComplete = elapsedJumpTime / jumpTime;
 
-            transform.position = new Vector3(0,startJumpHeight + jumpPath.Evaluate(percentageComplete) * jumpHeight);
+            transform.position = new Vector3(0, startJumpHeight + (jumpPath.Evaluate(percentageComplete) * jumpHeight));
         }
     }
 

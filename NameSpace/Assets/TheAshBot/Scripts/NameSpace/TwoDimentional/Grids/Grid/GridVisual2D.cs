@@ -53,7 +53,7 @@ namespace TheAshBot.TwoDimensional.Grids
             {
                 for (int y = 0; y < grid.GetHeight(); y++)
                 {
-                    int index = x * grid.GetHeight() + y;
+                    int index = (x * grid.GetHeight()) + y;
                     Vector3 quadSize = Vector2.one * grid.GetCellSize();
                     Vector2 offsetSize = quadSize / 2;
 

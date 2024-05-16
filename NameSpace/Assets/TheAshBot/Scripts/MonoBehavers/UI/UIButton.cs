@@ -40,7 +40,7 @@ namespace TheAshBot.UI
         {
             Canvas canvas = FindAnyObjectByType<Canvas>();
 
-            // finding the buttons holder gamobject
+            // finding the buttons holder Game Object
             GameObject uiButtonHolderGameObject = GameObject.Find("UIButtonHolder");
             if (uiButtonHolderGameObject != null)
             {
@@ -54,7 +54,7 @@ namespace TheAshBot.UI
                 Make_UIButtonHolder();
             }
 
-            // Maing the button GameObject
+            // Making the button GameObject
             GameObject uiButtonGameObject = new GameObject(name);
             uiButtonGameObject.transform.parent = uiButtonHolderGameObject.transform;
             uiButtonGameObject.transform.localScale = Vector2.one;
@@ -82,7 +82,7 @@ namespace TheAshBot.UI
             if (baseUIButton == null)
             {
                 uiButton.colorVisualization = ColorVisualization.SetColor;
-                uiButton.defualtColor = Color.HSVToRGB(1f / 3f, 0.7f, 0.7f);
+                uiButton.defaultColor = Color.HSVToRGB(1f / 3f, 0.7f, 0.7f);
                 uiButton.mouseOverUIColor = Color.HSVToRGB(1f / 3f, 0.7f, 0.65f);
                 uiButton.holdingMouseDownOverUIColor = Color.HSVToRGB(1f / 3f, 0.7f, 0.5f);
             }
@@ -94,7 +94,7 @@ namespace TheAshBot.UI
                 uiButton.OnMouseEndClickUI = baseUIButton.OnMouseEndClickUI;
 
                 uiButton.colorVisualization = baseUIButton.colorVisualization;
-                uiButton.defualtColor = baseUIButton.defualtColor;
+                uiButton.defaultColor = baseUIButton.defaultColor;
                 uiButton.mouseOverUIColor = baseUIButton.mouseOverUIColor;
                 uiButton.holdingMouseDownOverUIColor = baseUIButton.holdingMouseDownOverUIColor;
             }
@@ -105,7 +105,7 @@ namespace TheAshBot.UI
                 GameObject textGameObject = new GameObject(text.name);
                 textGameObject.transform.parent = uiButtonGameObject.transform;
 
-                RectTransform textRectTransfrom = textGameObject.AddComponent<RectTransform>();
+                RectTransform textRectTransform = textGameObject.AddComponent<RectTransform>();
                 TextMeshProUGUI textTextMeshProGUI = textGameObject.AddComponent<TextMeshProUGUI>();
 
                 textTextMeshProGUI.enableWordWrapping = text.woodWrap;
@@ -122,9 +122,9 @@ namespace TheAshBot.UI
                     textTextMeshProGUI.fontMaterial = text.fontMaterial;
                 }
 
-                textRectTransfrom.localScale = text.scale;
-                textRectTransfrom.sizeDelta = text.size;
-                textRectTransfrom.localPosition = text.position;
+                textRectTransform.localScale = text.scale;
+                textRectTransform.sizeDelta = text.size;
+                textRectTransform.localPosition = text.position;
             }
 
             return uiButton;
@@ -133,12 +133,12 @@ namespace TheAshBot.UI
             {
                 uiButtonHolderGameObject = new GameObject("UIButtonHolder");
                 uiButtonHolderGameObject.transform.parent = canvas.transform;
-                RectTransform uiButtonHolderRectTransfrom = uiButtonHolderGameObject.AddComponent<RectTransform>();
-                uiButtonHolderRectTransfrom.anchoredPosition = new Vector2(0, 0);
-                uiButtonHolderRectTransfrom.sizeDelta = new Vector2(0, 0);
-                uiButtonHolderRectTransfrom.localScale = Vector2.one;
-                uiButtonHolderRectTransfrom.anchorMin = Vector2.zero;
-                uiButtonHolderRectTransfrom.anchorMax = Vector2.one;
+                RectTransform uiButtonHolderRectTransform = uiButtonHolderGameObject.AddComponent<RectTransform>();
+                uiButtonHolderRectTransform.anchoredPosition = new Vector2(0, 0);
+                uiButtonHolderRectTransform.sizeDelta = new Vector2(0, 0);
+                uiButtonHolderRectTransform.localScale = Vector2.one;
+                uiButtonHolderRectTransform.anchorMin = Vector2.zero;
+                uiButtonHolderRectTransform.anchorMax = Vector2.one;
             }
         }
         #region Create
@@ -230,7 +230,7 @@ namespace TheAshBot.UI
 
 
         #region Variables
-        // These are public becouse they I want to be able to get/set them in other scripts, and show them in the inspector
+        // These are public because they I want to be able to get/set them in other scripts, and show them in the inspector
 #if ODIN_INSPECTOR
         #region ODIN_INSPECTOR
         
@@ -280,7 +280,7 @@ namespace TheAshBot.UI
 
         [Header("ColorVisualization")]
         public ColorVisualization colorVisualization = ColorVisualization.SetColor;
-        public Color defualtColor = Color.white;
+        public Color defaultColor = Color.white;
         public Color mouseOverUIColor = Color.white;
         public Color holdingMouseDownOverUIColor = Color.white;
 
@@ -317,7 +317,7 @@ namespace TheAshBot.UI
 
         private void Start()
         {
-            SetColorTo_DefualtColor();
+            SetColorTo_DefaultColor();
         }
 
         #endregion
@@ -344,7 +344,7 @@ namespace TheAshBot.UI
 
             isMouseOverUI = false;
 
-            SetColorTo_DefualtColor();
+            SetColorTo_DefaultColor();
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -441,13 +441,16 @@ namespace TheAshBot.UI
         #region Set Color
 
         /// <summary>
-        /// sets the color of the renderer to be the defualt color.
+        /// sets the color of the renderer to be the default color.
         /// </summary>
-        private void SetColorTo_DefualtColor()
+        private void SetColorTo_DefaultColor()
         {
-            if (renderType == RenderType.None || colorVisualization == ColorVisualization.None) return;
+            if (renderType == RenderType.None || colorVisualization == ColorVisualization.None)
+            {
+                return;
+            }
 
-            SetColor(defualtColor);
+            SetColor(defaultColor);
         }
 
         /// <summary>
@@ -455,7 +458,10 @@ namespace TheAshBot.UI
         /// </summary>
         private void SetColorTo_MouseOverUIColor()
         {
-            if (renderType == RenderType.None || colorVisualization == ColorVisualization.None) return;
+            if (renderType == RenderType.None || colorVisualization == ColorVisualization.None)
+            {
+                return;
+            }
 
             SetColor(mouseOverUIColor);
         }
@@ -465,7 +471,10 @@ namespace TheAshBot.UI
         /// </summary>
         private void SetColorTo_HoldingMouseDownOverUIColor()
         {
-            if (renderType == RenderType.None || colorVisualization == ColorVisualization.None) return;
+            if (renderType == RenderType.None || colorVisualization == ColorVisualization.None)
+            {
+                return;
+            }
 
             SetColor(holdingMouseDownOverUIColor);
         }

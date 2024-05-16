@@ -22,20 +22,20 @@ namespace TheAshBot.UI
 
         [Header("Buttons")]
         [SerializeField] private UIButton quitButton;
-        [SerializeField] private UIButton resuneButton;
+        [SerializeField] private UIButton resumeButton;
         [SerializeField] private UIButton optionsButton;
 
 
-        [Header("Valume")]
+        [Header("Volume")]
         [SerializeField] private Slider volumeSlider;
         [SerializeField] private AudioMixer audioMixer;
 
 
-        [Header("Sceen Resolution")]
+        [Header("Scene Resolution")]
         [SerializeField] private TMP_Dropdown resolutionDropdown;
         [SerializeField] private Toggle fullScreenToggle;
 
-        private int currentRefressRate;
+        private int currentRefreshRate;
         private List<Resolution> resolutionList;
         private List<Resolution> filteredResolutionList;
 
@@ -54,7 +54,7 @@ namespace TheAshBot.UI
             fullScreenToggle.onValueChanged.AddListener(SetFullScreen);
             resolutionDropdown.onValueChanged.AddListener(SetResolution);
             quitButton.OnMouseEndClickUI += Quit;
-            resuneButton.OnMouseEndClickUI += Resume;
+            resumeButton.OnMouseEndClickUI += Resume;
             optionsButton.OnMouseEndClickUI += Options;
         }
 
@@ -161,12 +161,12 @@ namespace TheAshBot.UI
             resolutionList = Screen.resolutions.ToList();
             filteredResolutionList = new List<Resolution>();
 
-            currentRefressRate = Screen.currentResolution.refreshRate;
+            currentRefreshRate = Screen.currentResolution.refreshRate;
             resolutionDropdown.ClearOptions();
 
             for (int i = 0; i < resolutionList.Count; i++)
             {
-                if (resolutionList[i].refreshRate == currentRefressRate)
+                if (resolutionList[i].refreshRate == currentRefreshRate)
                 {
                     filteredResolutionList.Add(resolutionList[i]);
                 }

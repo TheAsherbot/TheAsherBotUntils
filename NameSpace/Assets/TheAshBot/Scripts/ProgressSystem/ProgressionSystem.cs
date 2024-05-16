@@ -21,16 +21,16 @@ namespace TheAshBot.ProgressionSystem
         private int progress;
 
         /// <summary>
-        /// This will create the Pregress system
+        /// This will create the Progress system
         /// </summary>
-        /// <param name="maxProgress">This is the maxium amout of progress</param>
-        /// <param name="isCountingUp">Thid determains if the progress bar gose from 0 to Max progress, or Max progress to 0</param>
+        /// <param name="maxProgress">is the maximum amount of progress</param>
+        /// <param name="isCountingUp">determines if the progress bar goes from 0 to Max progress, or Max progress to 0</param>
         public ProgressionSystem(int maxProgress, bool isCountingUp = true)
         {
             this.isCountingUp = isCountingUp;
             this.maxProgress = maxProgress;
-            int starProgresstion = isCountingUp ? 0 : maxProgress;
-            progress = starProgresstion;
+            int starProgression = isCountingUp ? 0 : maxProgress;
+            progress = starProgression;
         }
 
 

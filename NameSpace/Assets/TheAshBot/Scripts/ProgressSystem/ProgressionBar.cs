@@ -1,6 +1,6 @@
 using System;
 
-using TheAshBot.MonoBehaviours;
+using TheAshBot.MonoBehaviors;
 
 using UnityEngine;
 
@@ -22,7 +22,7 @@ namespace TheAshBot.ProgressionSystem
         public static ProgressionSystem Create(int maxProgress, Transform fallow, Vector3 offset, Vector2 size, Color barColor, Color backgroundColor,
             Border border = null, bool isCountingUp = true, bool isVertical = false, int layer = 0, params Component[] addComponents)
         {
-            //                                             This is backwards becouse I am going to roatate it 90 degres.
+            //                                             This is backwards because I am going to rotate it 90 degrees.
             Vector2 rotatedSize = isVertical ? new Vector2(size.y, size.x) : size;
 
             // Main Health Bar
@@ -35,11 +35,11 @@ namespace TheAshBot.ProgressionSystem
                 GameObject borderGameObject = new GameObject("Border", typeof(SpriteRenderer));
                 borderGameObject.transform.SetParent(healthBarGameObject.transform);
                 borderGameObject.transform.localPosition = Vector3.zero;
-                borderGameObject.transform.localScale = rotatedSize + Vector2.one * border.thickness;
+                borderGameObject.transform.localScale = rotatedSize + (Vector2.one * border.thickness);
                 borderGameObject.GetComponent<SpriteRenderer>().color = border.color;
                 borderGameObject.GetComponent<SpriteRenderer>().sprite = AssetReferences.Instance.SinglePixelSprite;
                 RendererSortingOrderSorter borderRendererSortingOrderSorter = borderGameObject.AddComponent<RendererSortingOrderSorter>();
-                borderGameObject.gameObject.layer = layer;
+                borderGameObject.layer = layer;
                 borderRendererSortingOrderSorter.offset = -40;
             }
 
@@ -51,7 +51,7 @@ namespace TheAshBot.ProgressionSystem
             backgroundGameObject.GetComponent<SpriteRenderer>().color = backgroundColor;
             backgroundGameObject.GetComponent<SpriteRenderer>().sprite = AssetReferences.Instance.SinglePixelSprite;
             RendererSortingOrderSorter backgroundRendererSortingOrderSorter = backgroundGameObject.AddComponent<RendererSortingOrderSorter>();
-            backgroundGameObject.gameObject.layer = layer;
+            backgroundGameObject.layer = layer;
             backgroundRendererSortingOrderSorter.offset = -50;
 
             // Bar
@@ -68,7 +68,7 @@ namespace TheAshBot.ProgressionSystem
             barSpriteGameObject.GetComponent<SpriteRenderer>().color = barColor;
             barSpriteGameObject.GetComponent<SpriteRenderer>().sprite = AssetReferences.Instance.SinglePixelSprite;
             RendererSortingOrderSorter barSpriteRendererSortingOrderSorter = barSpriteGameObject.AddComponent<RendererSortingOrderSorter>();
-            barSpriteGameObject.gameObject.layer = layer;
+            barSpriteGameObject.layer = layer;
             barSpriteRendererSortingOrderSorter.offset = -60;
 
             
@@ -79,7 +79,7 @@ namespace TheAshBot.ProgressionSystem
             }
 
 
-            // Added more Compents
+            // Added more Comments
             foreach (Component component in addComponents)
             {
                 healthBarGameObject.CopyComponent(component);
@@ -88,7 +88,7 @@ namespace TheAshBot.ProgressionSystem
             // Setting up the progression bar
             ProgressionBar progressBar = healthBarGameObject.AddComponent<ProgressionBar>();
             ProgressionSystem healthSystem = new ProgressionSystem(maxProgress, isCountingUp);
-            progressBar.SetUp(healthSystem, offset, fallow, barGameObject.transform, healthBarGameObject);
+            progressBar.SetUp(healthSystem, offset, fallow, barGameObject.transform);
             return healthSystem;
         }
 
@@ -106,7 +106,6 @@ namespace TheAshBot.ProgressionSystem
         private Vector3 offset;
         private Transform bar;
         private Transform fallow;
-        private GameObject healthBarGameObject;
 
         private ProgressionSystem progressSystem;
 
@@ -126,12 +125,11 @@ namespace TheAshBot.ProgressionSystem
         #endregion
 
 
-        private void SetUp(ProgressionSystem progressSystem, Vector3 offset, Transform fallow, Transform bar, GameObject healthBarGameObject)
+        private void SetUp(ProgressionSystem progressSystem, Vector3 offset, Transform fallow, Transform bar)
         {
             this.offset = offset;
             this.fallow = fallow;
             this.bar = bar;
-            this.healthBarGameObject = healthBarGameObject;
 
             this.progressSystem = progressSystem;
 

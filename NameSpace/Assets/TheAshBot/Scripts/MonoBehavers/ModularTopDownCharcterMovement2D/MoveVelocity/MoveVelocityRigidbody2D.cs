@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TheAshBot.TwoDimensional.TopDownCharcterMovement
+namespace TheAshBot.TwoDimensional.TopDownCharacterMovement
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class MoveVelocityRigidbody2D : MonoBehaviour, IMoveVelocity2D

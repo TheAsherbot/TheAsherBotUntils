@@ -8,7 +8,7 @@ namespace TheAshBot.TwoDimensional.SideViewCharacterMovement
         [SerializeField] private float movementSpeed = 5;
 
 
-        private new PhysicsManager2D physicsManager;
+        private PhysicsManager2D physicsManager;
 
 
 

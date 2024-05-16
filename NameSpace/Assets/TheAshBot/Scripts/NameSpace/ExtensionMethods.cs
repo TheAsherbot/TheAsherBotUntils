@@ -6,18 +6,18 @@ namespace TheAshBot
     public static class ExtensionMethods
     {
         /// <summary>
-        /// will Copy a component onto another gamobject
+        /// will Copy a component onto another Game Object
         /// </summary>
-        /// <typeparam name="T">Is the typr of the component being copyed</typeparam>
-        /// <param name="destination">is the gamobject that the component is being copyed to.</param>
+        /// <typeparam name="T">Is the type of the component being copied</typeparam>
+        /// <param name="destination">is the Game Object that the component is being copied to.</param>
         /// <param name="original">is the original component</param>
-        /// <returns>the copyed compoent</returns>
+        /// <returns>the copied component</returns>
         public static T CopyComponent<T>(this GameObject destination, T original) where T : Component
         {
             // get the type of the component;
             Type componentType = original.GetType();
 
-            // adding the component to the gamobject
+            // adding the component to the Game Object
             Component copy = destination.AddComponent(componentType);
 
             // Getting the fields from the original component
@@ -26,7 +26,7 @@ namespace TheAshBot
             // cycling through all the field in the original component
             foreach (System.Reflection.FieldInfo field in fields)
             {
-                // setting the new copmponent value to equal the same as the original compinent's value for that field
+                // setting the new component value to equal the same as the original component's value for that field
                 field.SetValue(copy, field.GetValue(original));
             }
 
@@ -35,17 +35,17 @@ namespace TheAshBot
         }
 
         /// <summary>
-        /// will Copy a component onto another gamobject
+        /// will Copy a component onto another Game Object
         /// </summary>
-        /// <param name="destination">is the gamobject that the component is being copyed to.</param>
+        /// <param name="destination">is the Game Object that the component is being copied to.</param>
         /// <param name="original">is the original component</param>
-        /// <returns>the copyed compoent</returns>
+        /// <returns>the copied component</returns>
         public static Component CopyComponent(this GameObject destination, Component original)
         {
             // get the type of the component;
             Type type = original.GetType();
 
-            // adding the component to the gamobject
+            // adding the component to the Game Object
             Component copy = destination.AddComponent(type);
 
             // Getting the fields from the original component
@@ -54,7 +54,7 @@ namespace TheAshBot
             // cycling through all the field in the original component
             foreach (System.Reflection.FieldInfo field in fields)
             {
-                // setting the new copmponent value to equal the same as the original compinent's value for that field
+                // setting the new component value to equal the same as the original component's value for that field
                 field.SetValue(copy, field.GetValue(original));
             }
 
@@ -63,10 +63,10 @@ namespace TheAshBot
         }
 
         /// <summary>
-        /// will set the global scale of a transfrom
+        /// will set the global scale of a transform
         /// </summary>
-        /// <param name="transform">is the transfrom that the globel scal is being set to</param>
-        /// <param name="newGlobalScale">is the globel scale that the transfrom is being set to.</param>
+        /// <param name="transform">is the transform that the global scale is being set to</param>
+        /// <param name="newGlobalScale">is the global scale that the transform is being set to.</param>
         public static void SetGlobalScale(this Transform transform, Vector3 newGlobalScale)
         {
             transform.localScale = Vector3.one;
@@ -74,10 +74,10 @@ namespace TheAshBot
         }
 
         /// <summary>
-        /// will set the global scale of a transfrom
+        /// will set the global scale of a transform
         /// </summary>
-        /// <param name="transform">is the transfrom that the globel scal is being set to</param>
-        /// <param name="newGlobalScale">is the globel scale that the transfrom is being set to.</param>
+        /// <param name="transform">is the transform that the global scale is being set to</param>
+        /// <param name="newGlobalScale">is the global scale that the transform is being set to.</param>
         public static void SetGlobalScale(this Transform transform, Vector2 newGlobalScale)
         {
             transform.localScale = Vector3.one;

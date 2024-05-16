@@ -3,45 +3,45 @@ using UnityEditor;
 
 using UnityEngine;
 
-namespace TheAshBot.TwoDimensional.TopDownCharcterMovement.Editors
+namespace TheAshBot.TwoDimensional.TopDownCharacterMovement.Editors
 {
-    [CustomEditor(typeof(TopDownCharcterMovement2D))]
-    public class TopDownCharcterMovement2DEditor : Editor
+    [CustomEditor(typeof(TopDownCharacterMovement2D))]
+    public class TopDownCharacterMovement2DEditor : Editor
     {
 
 
-        TopDownCharcterMovement2D topDownCharcterMovement;
+        TopDownCharacterMovement2D topDownCharacterMovement;
 
 
 
         private void OnEnable()
         {
-            topDownCharcterMovement = (TopDownCharcterMovement2D)target;
+            topDownCharacterMovement = (TopDownCharacterMovement2D)target;
         }
 
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
 
-            if (!topDownCharcterMovement.TryGetComponent(out IMoveVelocity2D moveVelocity))
+            if (!topDownCharacterMovement.TryGetComponent(out IMoveVelocity2D moveVelocity))
             {
                 if (GUILayout.Button("Add Movement Velocity"))
                 {
-                    topDownCharcterMovement.AddMovementVelocity();
+                    topDownCharacterMovement.AddMovementVelocity();
                 }
             }
-            if (!topDownCharcterMovement.TryGetComponent(out IPlayerMovementInput2D playerMovementInput))
+            if (!topDownCharacterMovement.TryGetComponent(out IPlayerMovementInput2D playerMovementInput))
             {
                 if (GUILayout.Button("Add Movement Input"))
                 {
-                    topDownCharcterMovement.AddMovementInput();
+                    topDownCharacterMovement.AddMovementInput();
                 }
             }
-            if (!topDownCharcterMovement.TryGetComponent(out IMovePosition2D movePosition))
+            if (!topDownCharacterMovement.TryGetComponent(out IMovePosition2D movePosition))
             {
                 if (GUILayout.Button("Add Movement Position"))
                 {
-                    topDownCharcterMovement.AddMovementPosition();
+                    topDownCharacterMovement.AddMovementPosition();
                 }
             }
 

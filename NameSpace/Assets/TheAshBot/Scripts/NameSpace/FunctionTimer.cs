@@ -16,7 +16,7 @@ namespace TheAshBot
         private class DummyTimerClass : MonoBehaviour
         {
             /// <summary>
-            /// is triggerd every update
+            /// is triggered every update
             /// </summary>
             public event Action OnUpdate;
 
@@ -28,7 +28,7 @@ namespace TheAshBot
 
 
         /// <summary>
-        /// is the curent dummy timer class. there should only be one of these.
+        /// is the current dummy timer class. there should only be one of these.
         /// </summary>
         private static DummyTimerClass dummyTimer;
 
@@ -36,10 +36,10 @@ namespace TheAshBot
         /// <summary>
         /// will create a timer and when the timer is equal to wait time it will trigger the OnTimerFinished action
         /// </summary>
-        /// <param name="waitTime">is the time that will pass before the OnTimerFinished is tiggered</param>
-        /// <param name="disposeAfter_Cycles">is the number of cycles before the timer will be disposed. Put 0 if you do not want it to be automaticly be disposed of. Defualts to 1</param>
-        /// <param name="useUnscaledDeltaTime">if true then it will use unscaled delta time for the timer. Else it will used scaled delta time. Defualts to false</param>
-        /// <param name="OnTimerFinished">is the function that will be called when the timer is complete. this has a function timer that you can dispose manualy of if you want <code>FunctionTimer.Dispose();</code></param>
+        /// <param name="waitTime">is the time that will pass before the OnTimerFinished is tigered</param>
+        /// <param name="disposeAfter_Cycles">is the number of cycles before the timer will be disposed. Put 0 if you do not want it to be automatically be disposed of. Defaults to 1</param>
+        /// <param name="useUnscaledDeltaTime">if true then it will use unscaled delta time for the timer. Else it will used scaled delta time. Defaults to false</param>
+        /// <param name="OnTimerFinished">is the function that will be called when the timer is complete. this has a function timer that you can dispose manually of if you want <code>FunctionTimer.Dispose();</code></param>
         /// <returns>a function timer that you can dispose of when ever</returns>
         public static FunctionTimer Create(float waitTime, int disposeAfter_Cycles, bool useUnscaledDeltaTime, Action<FunctionTimer> OnTimerFinished)
         {
@@ -50,9 +50,9 @@ namespace TheAshBot
         /// <summary>
         /// will create a timer and when the timer is equal to wait time it will trigger the OnTimerFinished action
         /// </summary>
-        /// <param name="waitTime">is the time that will pass before the OnTimerFinished is tiggered</param>
-        /// <param name="disposeAfter_Cycles">is the number of cycles before the timer will be disposed. Put 0 if you do not want it to be automaticly be disposed of. Defualts to 1</param>
-        /// <param name="OnTimerFinished">is the function that will be called when the timer is complete. this has a function timer that you can dispose manualy of if you want <code>FunctionTimer.Dispose();</code></param>
+        /// <param name="waitTime">is the time that will pass before the OnTimerFinished is tigered</param>
+        /// <param name="disposeAfter_Cycles">is the number of cycles before the timer will be disposed. Put 0 if you do not want it to be automatically be disposed of. Defaults to 1</param>
+        /// <param name="OnTimerFinished">is the function that will be called when the timer is complete. this has a function timer that you can dispose manually of if you want <code>FunctionTimer.Dispose();</code></param>
         /// <returns>a function timer that you can dispose of when ever</returns>
         public static FunctionTimer Create(float waitTime, int disposeAfter_Cycles, Action<FunctionTimer> OnTimerFinished)
         {
@@ -61,8 +61,8 @@ namespace TheAshBot
         /// <summary>
         /// will create a timer and when the timer is equal to wait time it will trigger the OnTimerFinished action
         /// </summary>
-        /// <param name="waitTime">is the time that will pass before the OnTimerFinished is tiggered</param>
-        /// <param name="OnTimerFinished">is the function that will be called when the timer is complete. this has a function timer that you can dispose manualy of if you want <code>FunctionTimer.Dispose();</code></param>
+        /// <param name="waitTime">is the time that will pass before the OnTimerFinished is tigered</param>
+        /// <param name="OnTimerFinished">is the function that will be called when the timer is complete. this has a function timer that you can dispose manually of if you want <code>FunctionTimer.Dispose();</code></param>
         /// <returns>a function timer that you can dispose of when ever</returns>
         public static FunctionTimer Create(float waitTime, Action<FunctionTimer> OnTimerFinished)
         {
@@ -112,7 +112,7 @@ namespace TheAshBot
         }
 
         /// <summary>
-        /// will update the timer, and check if the timer is finished, and if it should be destoryed.
+        /// will update the timer, and check if the timer is finished, and if it should be destroyed.
         /// </summary>
         private void UpdateTimer()
         {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace TheAshBot.ThreeDimentional
+namespace TheAshBot.ThreeDimensional
 {
     public static class Mouse3D
     {
@@ -27,19 +27,19 @@ namespace TheAshBot.ThreeDimentional
         #region Normal
 
         /// <summary>
-        /// This will try to get a gameobject at the mouse World Position.
+        /// This will try to get a Game Object at the mouse World Position.
         /// </summary>
         /// <param name="camera">This is the camera that it takes the mouse position from.</param>
-        /// <param name="hit">This is th gameobject that the mouse is over.</param>
-        /// <returns>true if the mosue is over a gameobject.</returns>
+        /// <param name="hit">This is th Game Object that the mouse is over.</param>
+        /// <returns>true if the mouse is over a Game Object.</returns>
         public static bool TryGetObjectAtMousePosition(Camera camera, out GameObject hit)
         {
             Ray ray = camera.ScreenPointToRay(MousePosition);
-            UnityEngine.Physics.Raycast(ray, out RaycastHit raycastHit);
+            UnityEngine.Physics.Raycast(ray, out RaycastHit rayCastHit);
 
-            if (raycastHit.transform != null)
+            if (rayCastHit.transform != null)
             {
-                hit = raycastHit.transform.gameObject;
+                hit = rayCastHit.transform.gameObject;
                 return true;
             }
 
@@ -48,10 +48,10 @@ namespace TheAshBot.ThreeDimentional
         }
 
         /// <summary>
-        /// This will try to get a gameobject at the mouse World Position. 
+        /// This will try to get a Game Object at the mouse World Position. 
         /// </summary>
-        /// <param name="hit">This is th gameobject that the mouse is over.</param>
-        /// <returns>true if the mosue is over a gameobject.</returns>
+        /// <param name="hit">This is th Game Object that the mouse is over.</param>
+        /// <returns>true if the mouse is over a Game Object.</returns>
         public static bool TryGetObjectAtMousePosition(out GameObject hit)
         {
             return TryGetObjectAtMousePosition(Camera.main, out hit);
@@ -62,22 +62,22 @@ namespace TheAshBot.ThreeDimentional
         #region Ingore Component
 
         /// <summary>
-        /// This will try to get a gameobject at the mouse World Position that does not has a component.
+        /// This will try to get a Game Object at the mouse World Position that does not has a component.
         /// </summary>
-        /// <typeparam name="T">This is the compentent it ingores</typeparam>
+        /// <typeparam name="T">This is the competent it ignores</typeparam>
         /// <param name="camera">This is the camera that it takes the mouse position from.</param>
-        /// <param name="hit">This is th gameobject that the mouse is over.</param>
-        /// <returns>true if the mosue is over a gameobject.</returns>
-        public static bool TryGetObjectAtMousePositionIngoreComponent<T>(Camera camera, out GameObject hit) where T : Component
+        /// <param name="hit">This is th Game Object that the mouse is over.</param>
+        /// <returns>true if the mouse is over a Game Object.</returns>
+        public static bool TryGetObjectAtMousePositionIgnoreComponent<T>(Camera camera, out GameObject hit) where T : Component
         {
             Ray ray = camera.ScreenPointToRay(MousePosition);
-            RaycastHit[] raycastHitArray = UnityEngine.Physics.RaycastAll(ray);
+            RaycastHit[] rayCastHitArray = Physics.RaycastAll(ray);
 
-            foreach (RaycastHit raycastHit in raycastHitArray)
+            foreach (RaycastHit rayCastHit in rayCastHitArray)
             {
-                if (!raycastHit.transform.TryGetComponent(out T t))
+                if (!rayCastHit.transform.TryGetComponent(out T t))
                 {
-                    hit = raycastHit.transform.gameObject;
+                    hit = rayCastHit.transform.gameObject;
                     return true;
                 }
             }
@@ -87,14 +87,14 @@ namespace TheAshBot.ThreeDimentional
         }
 
         /// <summary>
-        /// This will try to get a gameobject at the mouse World Position that does not has a component. 
+        /// This will try to get a Game Object at the mouse World Position that does not has a component. 
         /// </summary>
-        /// <typeparam name="T">This is the compentent it ingores</typeparam>
-        /// <param name="hit">This is th gameobject that the mouse is over.</param>
-        /// <returns>true if the mosue is over a gameobject.</returns>
-        public static bool TryGetObjectAtMousePositionIngoreComponent<T>(out GameObject hit) where T : Component
+        /// <typeparam name="T">This is the component it ignores</typeparam>
+        /// <param name="hit">This is th Game Object that the mouse is over.</param>
+        /// <returns>true if the mouse is over a Game Object.</returns>
+        public static bool TryGetObjectAtMousePositionIgnoreComponent<T>(out GameObject hit) where T : Component
         {
-            return TryGetObjectAtMousePositionIngoreComponent<T>(Camera.main, out hit);
+            return TryGetObjectAtMousePositionIgnoreComponent<T>(Camera.main, out hit);
         }
 
         #endregion
@@ -102,22 +102,22 @@ namespace TheAshBot.ThreeDimentional
         #region With Component
 
         /// <summary>
-        /// This will try to get a gameobject at the mouse World Position that has a component.
+        /// This will try to get a Game Object at the mouse World Position that has a component.
         /// </summary>
         /// <typeparam name="T">This is the component that it has to have</typeparam>
         /// <param name="camera">This is the camera that it takes the mouse position from.</param>
-        /// <param name="hit">This is th gameobject that the mouse is over.</param>
-        /// <returns>true if the mosue is over a gameobject.</returns>
+        /// <param name="hit">This is th Game Object that the mouse is over.</param>
+        /// <returns>true if the mouse is over a Game Object.</returns>
         public static bool TryGetObjectAtMousePositionWithComponent<T>(Camera camera, out GameObject hit) where T : Component
         {
             Ray ray = camera.ScreenPointToRay(MousePosition);
-            RaycastHit[] raycastHitArray = UnityEngine.Physics.RaycastAll(ray);
+            RaycastHit[] rayCastHitArray = Physics.RaycastAll(ray);
 
-            foreach (RaycastHit raycastHit in raycastHitArray)
+            foreach (RaycastHit rayCastHit in rayCastHitArray)
             {
-                if (raycastHit.transform.TryGetComponent(out T t))
+                if (rayCastHit.transform.TryGetComponent(out T t))
                 {
-                    hit = raycastHit.transform.gameObject;
+                    hit = rayCastHit.transform.gameObject;
                     return true;
                 }
             }
@@ -127,15 +127,15 @@ namespace TheAshBot.ThreeDimentional
         }
 
         /// <summary>
-        /// This will try to get a gameobject at the mouse World Position that has a component.
+        /// This will try to get a Game Object at the mouse World Position that has a component.
         /// </summary>
         /// <typeparam name="T">This is the component that it has to have</typeparam>
         /// <param name="camera">This is the camera that it takes the mouse position from.</param>
-        /// <param name="hit">This is th gameobject that the mouse is over.</param>
-        /// <returns>true if the mosue is over a gameobject.</returns>
+        /// <param name="hit">This is th Game Object that the mouse is over.</param>
+        /// <returns>true if the mouse is over a Game Object.</returns>
         public static bool TryGetObjectAtMousePositionWithComponent<T>(out GameObject hit) where T : Component
         {
-            return TryGetObjectAtMousePositionIngoreComponent<T>(Camera.main, out hit);
+            return TryGetObjectAtMousePositionIgnoreComponent<T>(Camera.main, out hit);
         }
 
         #endregion
@@ -146,44 +146,44 @@ namespace TheAshBot.ThreeDimentional
 
         #region GetMousePosition
         /// <summary>
-        /// This gets the mouse position in 3D using a raycast
+        /// This gets the mouse position in 3D using a ray cast
         /// </summary>
-        /// <param name="camera">This is the camera that the raycasts shoots from</param>
-        /// <param name="layerMask">This is the layers that the raycast egnors</param>
-        /// <returns>This return the the point that the raycast hits</returns>
+        /// <param name="camera">This is the camera that the ray casts shoots from</param>
+        /// <param name="layerMask">This is the layers that the ray cast ignores</param>
+        /// <returns>This return the the point that the ray cast hits</returns>
         public static Vector3 GetMousePosition3D(Camera camera, LayerMask layerMask)
         {
             Ray ray = camera.ScreenPointToRay(MousePosition);
-            UnityEngine.Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue, layerMask);
-            return raycastHit.point;
+            UnityEngine.Physics.Raycast(ray, out RaycastHit rayCastHit, float.MaxValue, layerMask);
+            return rayCastHit.point;
         }
 
         /// <summary>
-        /// This gets the mouse position in 3D using a raycast
+        /// This gets the mouse position in 3D using a ray cast
         /// </summary>
-        /// <param name="camera">This is the camera that the raycasts shoots from</param>
-        /// <returns>This return the the point that the raycast hits</returns>
+        /// <param name="camera">This is the camera that the ray casts are shoot from</param>
+        /// <returns>This return the the point that the ray cast hits</returns>
         public static Vector3 GetMousePosition3D(Camera camera)
         {
             Ray ray = camera.ScreenPointToRay(MousePosition);
-            UnityEngine.Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue);
-            return raycastHit.point;
+            UnityEngine.Physics.Raycast(ray, out RaycastHit rayCastHit, float.MaxValue);
+            return rayCastHit.point;
         }
 
         /// <summary>
-        /// This gets the mouse position in 3D using a raycast
+        /// This gets the mouse position in 3D using a ray cast
         /// </summary>
-        /// <param name="layerMask">This is the layers that the raycast egnors</param>
-        /// <returns>This return the the point that the raycast hits</returns>
+        /// <param name="layerMask">This is the layers that the ray cast ignores</param>
+        /// <returns>This return the the point that the ray cast hits</returns>
         public static Vector3 GetMousePosition3D(LayerMask layerMask)
         {
             return GetMousePosition3D(Camera.main, layerMask);
         }
 
         /// <summary>
-        /// This gets the mouse position in 3D using a raycast
+        /// This gets the mouse position in 3D using a ray cast
         /// </summary>
-        /// <returns>This return the the point that the raycast hits</returns>
+        /// <returns>This return the the point that the ray cast hits</returns>
         public static Vector3 GetMousePosition3D()
         {
             return GetMousePosition3D(Camera.main);
@@ -192,35 +192,35 @@ namespace TheAshBot.ThreeDimentional
 
         #region DebugLogMousePosition
         /// <summary>
-        /// This logs the mouse position in 3D using a raycast
+        /// This logs the mouse position in 3D using a ray cast
         /// </summary>
-        /// <param name="camera">This is the camera that the raycasts shoots from</param>
-        /// <param name="layerMask">This is the layers that the raycast egnors</param>
+        /// <param name="camera">This is the camera that the ray casts shoots from</param>
+        /// <param name="layerMask">This is the layers that the ray cast ignores</param>
         public static void DebugLogMousePosition3D(Camera camera, LayerMask layerMask)
         {
             Debug.Log("MousePosition3D = " + GetMousePosition3D(camera, layerMask));
         }
 
         /// <summary>
-        /// This logs the mouse position in 3D using a raycast
+        /// This logs the mouse position in 3D using a ray cast
         /// </summary>
-        /// <param name="camera">This is the camera that the raycasts shoots from</param>
+        /// <param name="camera">This is the camera that the ray casts shoots from</param>
         public static void DebugLogMousePosition3D(Camera camera)
         {
             Debug.Log("MousePosition3D = " + GetMousePosition3D(camera));
         }
 
         /// <summary>
-        /// This logs the mouse position in 3D using a raycast
+        /// This logs the mouse position in 3D using a ray cast
         /// </summary>
-        /// <param name="layerMask">This is the layers that the raycast egnors</param>
+        /// <param name="layerMask">This is the layers that the ray cast ignores</param>
         public static void DebugLogMousePosition3D(LayerMask layerMask)
         {
             Debug.Log("MousePosition3D = " + GetMousePosition3D(layerMask));
         }
 
         /// <summary>
-        /// This logs the mouse position in 3D using a raycast
+        /// This logs the mouse position in 3D using a ray cast
         /// </summary>
         public static void DebugLogMousePosition3D()
         {
@@ -234,40 +234,40 @@ namespace TheAshBot.ThreeDimentional
 
         #region GetMousePositionInt
         /// <summary>
-        /// Using a raycast to gets this the mouse position in 3D and round it to an int
+        /// Using a ray cast to gets this the mouse position in 3D and round it to an int
         /// </summary>
-        /// <param name="camera">This is the camera that the raycasts shoots from</param>
-        /// <param name="layerMask">This is the layers that the raycast egnors</param>
-        /// <returns>This return the the point that the raycast hits Rounded to and int</returns>
+        /// <param name="camera">This is the camera that the ray casts shoots from</param>
+        /// <param name="layerMask">This is the layers that the ray cast ignores</param>
+        /// <returns>This return the the point that the ray cast hits Rounded to and int</returns>
         public static Vector3Int GetMousePositionInt3D(Camera camera, LayerMask layerMask)
         {
             return Vector3Int.RoundToInt(GetMousePosition3D(camera, layerMask));
         }
 
         /// <summary>
-        /// Using a raycast to gets this the mouse position in 3D and round it to an int
+        /// Using a ray cast to gets this the mouse position in 3D and round it to an int
         /// </summary>
-        /// <param name="camera">This is the camera that the raycasts shoots from</param>
-        /// <returns>This return the the point that the raycast hits Rounded to and int</returns>
+        /// <param name="camera">This is the camera that the ray casts shoots from</param>
+        /// <returns>This return the the point that the recast hits Rounded to and int</returns>
         public static Vector3Int GetMousePositionInt3D(Camera camera)
         {
             return Vector3Int.RoundToInt(GetMousePosition3D(camera));
         }
 
         /// <summary>
-        /// Using a raycast to gets this the mouse position in 3D and round it to an int
+        /// Using a ray cast to gets this the mouse position in 3D and round it to an int
         /// </summary>
-        /// <param name="layerMask">This is the layers that the raycast egnors</param>
-        /// <returns>This return the the point that the raycast hits Rounded to and int</returns>
+        /// <param name="layerMask">This is the layers that the ray cast ignores</param>
+        /// <returns>This return the the point that the ray cast hits Rounded to and int</returns>
         public static Vector3Int GetMousePositionInt3D(LayerMask layerMask)
         {
             return Vector3Int.RoundToInt(GetMousePosition3D(layerMask));
         }
 
         /// <summary>
-        /// Using a raycast to gets this the mouse position in 3D and round it to an int
+        /// Using a ray cast to gets this the mouse position in 3D and round it to an int
         /// </summary>
-        /// <returns>This return the the point that the raycast hits Rounded to and int</returns>
+        /// <returns>This return the the point that the ray cast hits Rounded to and int</returns>
         public static Vector3Int GetMousePositionInt3D()
         {
             return Vector3Int.RoundToInt(GetMousePosition3D());
@@ -276,35 +276,35 @@ namespace TheAshBot.ThreeDimentional
 
         #region DebugLogMousePositionInt
         /// <summary>
-        ///  using a raycast this logs the mouse position in 3D rounded to a vector3 int
+        ///  using a ray cast this logs the mouse position in 3D rounded to a vector3 int
         /// </summary>
-        /// <param name="camera">This is the camera that the raycasts shoots from</param>
-        /// <param name="layerMask">This is the layers that the raycast egnors</param>
+        /// <param name="camera">This is the camera that the ray casts shoots from</param>
+        /// <param name="layerMask">This is the layers that the ray cast ignores</param>
         public static void DebugLogMousePositionInt3D(Camera camera, LayerMask layerMask)
         {
             Debug.Log("MousePositionInt3D = " + GetMousePositionInt3D(camera, layerMask));
         }
 
         /// <summary>
-        ///  using a raycast this logs the mouse position in 3D rounded to a vector3 int
+        ///  using a ray cast this logs the mouse position in 3D rounded to a vector3 int
         /// </summary>
-        /// <param name="camera">This is the camera that the raycasts shoots from</param>
+        /// <param name="camera">This is the camera that the ray casts shoots from</param>
         public static void DebugLogMousePositionInt3D(Camera camera)
         {
             Debug.Log("MousePositionInt3D = " + GetMousePositionInt3D(camera));
         }
 
         /// <summary>
-        ///  using a raycast this logs the mouse position in 3D rounded to a vector3 int
+        ///  using a ray cast this logs the mouse position in 3D rounded to a vector3 int
         /// </summary>
-        /// <param name="layerMask">This is the layers that the raycast egnors</param>
+        /// <param name="layerMask">This is the layers that the ray cast ignores</param>
         public static void DebugLogMousePositionInt3D(LayerMask layerMask)
         {
             Debug.Log("MousePositionInt3D = " + GetMousePositionInt3D(layerMask));
         }
 
         /// <summary>
-        ///  using a raycast this logs the mouse position in 3D rounded to a vector3 int
+        ///  using a ray cast this logs the mouse position in 3D rounded to a vector3 int
         /// </summary>
         public static void DebugLogMousePositionInt3D()
         {
@@ -317,27 +317,27 @@ namespace TheAshBot.ThreeDimentional
         #region IsMouseOverUI
 
         /// <summary>
-        /// This checks to see if the mouse is over UI while ingoring a script.
+        /// This checks to see if the mouse is over UI while ignoring a script.
         /// </summary>
-        /// <typeparam name="T">This is the Component that the is being ingnored.</typeparam>
+        /// <typeparam name="T">This is the Component that the is being ignored.</typeparam>
         /// <returns>true if the mouse is over the UI without the script.</returns>
-        public static bool IsMouseOverUIIngoreComponent<T>() where T : Component
+        public static bool IsMouseOverUIIgnoreComponent<T>() where T : Component
         {
             PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
             pointerEventData.position = MousePosition;
 
-            List<RaycastResult> raycastResultList = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(pointerEventData, raycastResultList);
-            for (int raycastNumber = 0; raycastNumber < raycastResultList.Count; raycastNumber++)
+            List<RaycastResult> rayCastResultList = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerEventData, rayCastResultList);
+            for (int rayCastNumber = 0; rayCastNumber < rayCastResultList.Count; rayCastNumber++)
             {
-                if (raycastResultList[raycastNumber].gameObject.GetComponent<T>() != null)
+                if (rayCastResultList[rayCastNumber].gameObject.GetComponent<T>() != null)
                 {
-                    raycastResultList.RemoveAt(raycastNumber);
-                    raycastNumber--;
+                    rayCastResultList.RemoveAt(rayCastNumber);
+                    rayCastNumber--;
                 }
             }
 
-            return raycastResultList.Count > 0;
+            return rayCastResultList.Count > 0;
         }
 
         /// <summary>
@@ -350,11 +350,11 @@ namespace TheAshBot.ThreeDimentional
             PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
             pointerEventData.position = MousePosition;
 
-            List<RaycastResult> raycastResultList = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(pointerEventData, raycastResultList);
-            for (int raycastNumber = 0; raycastNumber < raycastResultList.Count; raycastNumber++)
+            List<RaycastResult> rayCastResultList = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerEventData, rayCastResultList);
+            for (int rayCastNumber = 0; rayCastNumber < rayCastResultList.Count; rayCastNumber++)
             {
-                if (raycastResultList[raycastNumber].gameObject.GetComponent<T>() != null)
+                if (rayCastResultList[rayCastNumber].gameObject.GetComponent<T>() != null)
                 {
                     return true;
                 }

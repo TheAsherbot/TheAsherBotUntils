@@ -14,7 +14,7 @@ namespace TheAshBot.Meshes
 
 
         /// <summary>
-        /// This makes a perimed mesh
+        /// This makes a pyramid mesh
         /// </summary>
         public static Mesh MakeFieldOfViewMesh(float meshHeight, float meshWidth, float meshDepth)
         {
@@ -30,21 +30,21 @@ namespace TheAshBot.Meshes
             vertices[1] = new Vector3( meshWidth / 2,  meshHeight / 2, meshDepth);
             // This is the Top Right Vertex
             vertices[2] = new Vector3(-meshWidth / 2,  meshHeight / 2, meshDepth);
-            // This is the Bottum Right Vertex
+            // This is the Bottom Right Vertex
             vertices[3] = new Vector3(-meshWidth / 2, -meshHeight / 2, meshDepth);
-            // This is the Bottum Left Vertex
+            // This is the Bottom Left Vertex
             vertices[4] = new Vector3( meshWidth / 2, -meshHeight / 2, meshDepth);
 
-            uv = MeshHelper.AssineUvsFromVertices(vertices);
+            uv = MeshHelper.AssignUvsFromVertices(vertices);
 
             triangles = MeshHelper.MakeTriangle(triangles, 0, 2, 1, 0); // Top
-            triangles = MeshHelper.MakeTriangle(triangles, 3, 4, 3, 0); // Bottum
+            triangles = MeshHelper.MakeTriangle(triangles, 3, 4, 3, 0); // Bottom
             triangles = MeshHelper.MakeTriangle(triangles, 6, 0, 1, 4); // Left
             triangles = MeshHelper.MakeTriangle(triangles, 9, 3, 2, 0); // Right
             triangles = MeshHelper.MakeTriangle(triangles, 12, 2, 4, 1); // Back Left
             triangles = MeshHelper.MakeTriangle(triangles, 15, 3, 4, 2); // Back Right
 
-            mesh = MeshHelper.AssineVerticesUvAndTrianglesToMesh(vertices, uv, triangles);
+            mesh = MeshHelper.AssignVerticesUvAndTrianglesToMesh(vertices, uv, triangles);
 
             return mesh;
         }
@@ -53,7 +53,7 @@ namespace TheAshBot.Meshes
         #region Make Primitives
         
         /// <summary>
-        /// This makes a triangel mesh
+        /// This makes a triangle mesh
         /// </summary>
         public static Mesh MakeEquilateralTriangleMesh()
         {
@@ -68,12 +68,12 @@ namespace TheAshBot.Meshes
             vertices[1] = new Vector2( 0.5f, -0.5f);
             vertices[2] = new Vector2(-0.5f, -0.5f);
 
-            MeshHelper.AssineUvsFromVertices(vertices, Vector2.one / 2);
+            MeshHelper.AssignUvsFromVertices(vertices, Vector2.one / 2);
 
             // Note: if you have the triangle in a counter clockwise order than it will be backwards
             triangles = MeshHelper.MakeTriangle(triangles, 0, 0, 1, 2);
 
-            mesh = MeshHelper.AssineVerticesUvAndTrianglesToMesh(vertices, uv, triangles);
+            mesh = MeshHelper.AssignVerticesUvAndTrianglesToMesh(vertices, uv, triangles);
 
             return mesh;
         }
@@ -95,20 +95,20 @@ namespace TheAshBot.Meshes
             vertices[2] = new Vector2(1, 1) - (Vector2.one / 2);
             vertices[3] = new Vector2(1, 0) - (Vector2.one / 2);
 
-            MeshHelper.AssineUvsFromVertices(vertices, Vector3.one / 2);
+            MeshHelper.AssignUvsFromVertices(vertices, Vector3.one / 2);
 
             // Note: if you have the triangle in a counter clockwise order than it will be backwards
             triangles = MeshHelper.MakeTriangle(triangles, 0, 0, 1, 2);
 
             triangles = MeshHelper.MakeTriangle(triangles, 3, 0, 2, 3);
 
-            mesh = MeshHelper.AssineVerticesUvAndTrianglesToMesh(vertices, uv, triangles);
+            mesh = MeshHelper.AssignVerticesUvAndTrianglesToMesh(vertices, uv, triangles);
 
             return mesh;
         }
 
         /// <summary>
-        /// This is the random meshes i am makeing
+        /// This is the random meshes i am making
         /// </summary>
         public static Mesh MakeCubeMesh()
         {
@@ -129,7 +129,7 @@ namespace TheAshBot.Meshes
             vertices[7] = new Vector3(1, 0, 1) - (Vector3.one / 2);
             #endregion
 
-            MeshHelper.AssineUvsFromVertices(vertices, new Vector3(0.5f, 0.5f, 0.5f));
+            MeshHelper.AssignUvsFromVertices(vertices, new Vector3(0.5f, 0.5f, 0.5f));
 
             #region Make Triangles
             // Note: if you have the triangle in a counter clockwise order than it will be backwards
@@ -163,14 +163,14 @@ namespace TheAshBot.Meshes
             // Back Right
             triangles = MeshHelper.MakeTriangle(triangles, 27, 6, 5, 7);
 
-            // Bottum Left
+            // Bottom Left
             triangles = MeshHelper.MakeTriangle(triangles, 30, 0, 3, 4);
 
-            // Bottum Right
+            // Bottom Right
             triangles = MeshHelper.MakeTriangle(triangles, 33, 7, 4, 3);
             #endregion
 
-            mesh = MeshHelper.AssineVerticesUvAndTrianglesToMesh(vertices, uv, triangles);
+            mesh = MeshHelper.AssignVerticesUvAndTrianglesToMesh(vertices, uv, triangles);
 
             return mesh;
         }

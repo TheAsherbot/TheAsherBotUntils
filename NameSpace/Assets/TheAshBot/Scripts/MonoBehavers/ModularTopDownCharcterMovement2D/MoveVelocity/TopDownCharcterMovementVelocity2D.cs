@@ -1,14 +1,14 @@
 using UnityEngine;
 
-namespace TheAshBot.TwoDimensional.TopDownCharcterMovement
+namespace TheAshBot.TwoDimensional.TopDownCharacterMovement
 {
-    public class TopDownCharcterMovementVelocity2D : MonoBehaviour, IMoveVelocity2D
+    public class TopDownCharacterMovementVelocity2D : MonoBehaviour, IMoveVelocity2D
     {
 
 
         public enum MovementType
         {
-            Transfrom,
+            Transform,
             Rigidbody,
         }
 
@@ -26,8 +26,8 @@ namespace TheAshBot.TwoDimensional.TopDownCharcterMovement
         {
             switch (movementType)
             {
-                case MovementType.Transfrom:
-                    transform.position += velocityVector * movementSpeed * Time.deltaTime;
+                case MovementType.Transform:
+                    transform.position += movementSpeed * Time.deltaTime * velocityVector;
                     break;
             }
         }
@@ -37,7 +37,11 @@ namespace TheAshBot.TwoDimensional.TopDownCharcterMovement
             switch (movementType)
             {
                 case MovementType.Rigidbody:
-                    if (rigidbody == null) AddSetRigidBody();
+                    if (rigidbody == null)
+                    {
+                        AddSetRigidBody();
+                    }
+
                     rigidbody.velocity = velocityVector * movementSpeed;
                     break;
             }

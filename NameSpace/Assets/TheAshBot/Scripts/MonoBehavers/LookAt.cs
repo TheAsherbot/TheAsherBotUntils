@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TheAshBot.MonoBehaviours
+namespace TheAshBot.MonoBehaviors
 {
     public class LookAt : MonoBehaviour
     {

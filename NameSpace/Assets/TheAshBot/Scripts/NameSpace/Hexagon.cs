@@ -19,13 +19,13 @@ namespace TheAshBot
             this.centerPoint = centerPoint;
             this.halfSize = halfSize;
 
-            upperCorner = centerPoint + new Vector2(0, +1) * halfSize;
-            lowerCorner = centerPoint + new Vector2(0, -1) * halfSize;
+            upperCorner = centerPoint + (new Vector2(0, +1) * halfSize);
+            lowerCorner = centerPoint + (new Vector2(0, -1) * halfSize);
 
-            upperRightCorner = centerPoint + new Vector2(+1, +0.5f) * halfSize;
-            upperLeftCorner = centerPoint + new Vector2(-1, +0.5f) * halfSize;
-            lowerRightCorner = centerPoint + new Vector2(+1, -0.5f) * halfSize;
-            lowerLeftCorner = centerPoint + new Vector2(-1, -0.5f) * halfSize;
+            upperRightCorner = centerPoint + (new Vector2(+1, +0.5f) * halfSize);
+            upperLeftCorner = centerPoint + (new Vector2(-1, +0.5f) * halfSize);
+            lowerRightCorner = centerPoint + (new Vector2(+1, -0.5f) * halfSize);
+            lowerLeftCorner = centerPoint + (new Vector2(-1, -0.5f) * halfSize);
 
         }
     }
@@ -47,13 +47,13 @@ namespace TheAshBot
             this.centerPoint = centerPoint;
             this.halfSize = halfSize;
 
-            rightCorner = centerPoint + new Vector2(+1, 0) * halfSize;
-            leftCorner = centerPoint + new Vector2(-1, 0) * halfSize;
+            rightCorner = centerPoint + (new Vector2(+1, 0) * halfSize);
+            leftCorner = centerPoint + (new Vector2(-1, 0) * halfSize);
 
-            upperRightCorner = centerPoint + new Vector2(0.5f, 1) * halfSize;
-            upperLeftCorner = centerPoint + new Vector2(0.5f, -1) * halfSize;
-            lowerRightCorner = centerPoint + new Vector2(-0.5f, 1) * halfSize;
-            lowerLeftCorner = centerPoint + new Vector2(-0.5f, -1) * halfSize;
+            upperRightCorner = centerPoint + (new Vector2(0.5f, 1) * halfSize);
+            upperLeftCorner = centerPoint + (new Vector2(0.5f, -1) * halfSize);
+            lowerRightCorner = centerPoint + (new Vector2(-0.5f, 1) * halfSize);
+            lowerLeftCorner = centerPoint + (new Vector2(-0.5f, -1) * halfSize);
 
         }
     }

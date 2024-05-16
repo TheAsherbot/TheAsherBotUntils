@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace TheAshBot.TwoDimensional.TopDownCharcterMovement
+namespace TheAshBot.TwoDimensional.TopDownCharacterMovement
 {
-    public class MoveVelocityTransfrom2D : MonoBehaviour, IMoveVelocity2D
+    public class MoveVelocityTransform2D : MonoBehaviour, IMoveVelocity2D
     {
 
 
@@ -14,7 +14,7 @@ namespace TheAshBot.TwoDimensional.TopDownCharcterMovement
 
         private void Update()
         {
-            transform.position += velocityVector * movementSpeed * Time.deltaTime;
+            transform.position += movementSpeed * Time.deltaTime * velocityVector;
         }
 
 

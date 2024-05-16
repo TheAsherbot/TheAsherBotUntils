@@ -10,7 +10,10 @@ namespace TheAshBot
         {
             get
             {
-                if (instance == null) instance = (Instantiate(Resources.Load("GameAssets")) as GameObject).GetComponent<AssetReferences>();
+                if (instance == null)
+                {
+                    instance = (Instantiate(Resources.Load("GameAssets")) as GameObject).GetComponent<AssetReferences>();
+                }
                 return instance;
             }
         }

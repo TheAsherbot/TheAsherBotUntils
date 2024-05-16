@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace TheAshBot.TwoDimensional.TopDownCharcterMovement
+namespace TheAshBot.TwoDimensional.TopDownCharacterMovement
 {
-    public class TopDownCharcterMovementInput2D : MonoBehaviour, IPlayerMovementInput2D
+    public class TopDownCharacterMovementInput2D : MonoBehaviour, IPlayerMovementInput2D
     {
 
 
@@ -58,8 +58,8 @@ namespace TheAshBot.TwoDimensional.TopDownCharcterMovement
 
                     if (!TryGetComponent(out IMoveVelocity2D moveVelocity))
                     {
-                        moveVelocity = gameObject.AddComponent<TopDownCharcterMovementVelocity2D>();
-                        (moveVelocity as TopDownCharcterMovementVelocity2D).SetMovementSpeed(5);
+                        moveVelocity = gameObject.AddComponent<TopDownCharacterMovementVelocity2D>();
+                        (moveVelocity as TopDownCharacterMovementVelocity2D).SetMovementSpeed(5);
                     }
                     moveVelocity.SetVelocity(moveVectorNormalized);
                     break;
@@ -77,8 +77,8 @@ namespace TheAshBot.TwoDimensional.TopDownCharcterMovement
 
                     if (!TryGetComponent(out IMoveVelocity2D moveVelocity))
                     {
-                        moveVelocity = gameObject.AddComponent<TopDownCharcterMovementVelocity2D>();
-                        (moveVelocity as TopDownCharcterMovementVelocity2D).SetMovementSpeed(5);
+                        moveVelocity = gameObject.AddComponent<TopDownCharacterMovementVelocity2D>();
+                        (moveVelocity as TopDownCharacterMovementVelocity2D).SetMovementSpeed(5);
                     }
                     moveVelocity.SetVelocity(moveVectorNormalized);
                     break;
@@ -91,11 +91,11 @@ namespace TheAshBot.TwoDimensional.TopDownCharcterMovement
             {
                 if (!TryGetComponent(out IMovePosition2D movePosition2D))
                 {
-                    movePosition2D = gameObject.AddComponent<TopDownCharcterMovementPosition2D>();
+                    movePosition2D = gameObject.AddComponent<TopDownCharacterMovementPosition2D>();
                 }
 
                 movePosition2D.SetMovePosition(Mouse2D.GetMousePosition2D());
-                //                             Mouse 2D handles the diferent input type.
+                //                             Mouse 2D handles the different input type.
             }
         }
 
@@ -105,11 +105,23 @@ namespace TheAshBot.TwoDimensional.TopDownCharcterMovement
             float moveX = 0f;
             float moveY = 0f;
 
-            if (Input.GetKey(up)) moveY += 1;
-            if (Input.GetKey(down)) moveY -= 1;
+            if (Input.GetKey(up))
+            {
+                moveY += 1;
+            }
+            if (Input.GetKey(down))
+            {
+                moveY -= 1;
+            }
 
-            if (Input.GetKey(left)) moveX -= 1;
-            if (Input.GetKey(right)) moveX += 1;
+            if (Input.GetKey(left))
+            {
+                moveX -= 1;
+            }
+            if (Input.GetKey(right))
+            {
+                moveX += 1;
+            }
 
             return new Vector3(moveX, moveY);
         }

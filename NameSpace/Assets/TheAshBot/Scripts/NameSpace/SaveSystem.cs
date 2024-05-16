@@ -1,7 +1,5 @@
 using System.IO;
 
-using Unity.VisualScripting;
-
 using UnityEngine;
 
 
@@ -38,11 +36,11 @@ namespace TheAshBot
             /// <summary>
             /// This will not use the root path.
             /// </summary>
-            Costum,
+            Custom,
         }
 
         /// <summary>
-        /// This is a enum with all the suported file tpyes.
+        /// This is a enum with all the supported file types.
         /// </summary>
         public enum FileType
         {
@@ -61,7 +59,7 @@ namespace TheAshBot
             /// <summary>
             /// This allows you to chose what file type you want the file to be in the name of the file.
             /// </summary>
-            Costum,
+            Custom,
         }
 
 
@@ -74,8 +72,8 @@ namespace TheAshBot
         /// <param name="path">This is the path that the file will be saved to. This goes after the "rootSavePath"</param>
         /// <param name="name">This is the name of the file being saved.</param>
         /// <param name="fileType">This is the type of file being saved.</param>
-        /// <param name="canOveride">If true then this will overide any data with the same name, and at the same path, and with the same filetpye as this file.</param>
-        public static void SaveString(string text, RootPath rootSavePath, string path, string name, FileType fileType, bool canOveride)
+        /// <param name="canOverride">If true then this will override any data with the same name, and at the same path, and with the same filetype as this file.</param>
+        public static void SaveString(string text, RootPath rootSavePath, string path, string name, FileType fileType, bool canOverride)
         {
             string saveFolder = GetPathRoot(rootSavePath) + path;
             string wholePath = saveFolder + "/" + name + GetFileType(fileType);
@@ -88,7 +86,7 @@ namespace TheAshBot
             }
             else
             {
-                // If the path does not exiset..
+                // If the path does not exist.
                 // Than create the directory
                 Directory.CreateDirectory(saveFolder);
 
@@ -100,10 +98,10 @@ namespace TheAshBot
             {
                 if (File.Exists(wholePath))
                 {
-                    // the file olready exist
-                    if (!canOveride)
+                    // the file already exist
+                    if (!canOverride)
                     {
-                        // Can not overide the older file
+                        // Can not override the older file
                         // adding a number to the end
                         int saveNumber = 0;
                         wholePath = saveFolder + "/" + name + "_" + saveNumber + GetFileType(fileType);
@@ -129,14 +127,14 @@ namespace TheAshBot
         /// <param name="rootSavePath">This is the root of the path the file will be saved to</param>
         /// <param name="path">This is the path that the file will be saved to. This goes after the "rootSavePath"</param>
         /// <param name="name">This is the name of the file being saved.</param>
-        /// <param name="canOveride">If true then this will overide any data with the same name, and at the same path, and with the same filetpye as this file.</param>
-        public static void SaveJson(object jsonObject, RootPath rootSavePath, string path, string name, bool canOveride)
+        /// <param name="canOverride">If true then this will override any data with the same name, and at the same path, and with the same filetype as this file.</param>
+        public static void SaveJson(object jsonObject, RootPath rootSavePath, string path, string name, bool canOverride)
         {
             // Converting the json object to a string
             string text = JsonUtility.ToJson(jsonObject);
 
-            // saveing the string as a json file
-            SaveString(text, rootSavePath, path, name, FileType.Json, canOveride);
+            // saving the string as a json file
+            SaveString(text, rootSavePath, path, name, FileType.Json, canOverride);
         }
 
         /// <summary>
@@ -183,7 +181,7 @@ namespace TheAshBot
 
 
         /// <summary>
-        /// This uses the enum to determain where the root path is.
+        /// This uses the enum to determine where the root path is.
         /// </summary>
         /// <param name="savePathRoot">This is the RootPath enum.</param>
         /// <returns>The root path as a string</returns>
@@ -201,7 +199,7 @@ namespace TheAshBot
                     return Application.streamingAssetsPath + "/";
                 case RootPath.TemporaryCachePath:
                     return Application.temporaryCachePath + "/";
-                case RootPath.Costum:
+                case RootPath.Custom:
                     return "";
                 default:
                     return Application.persistentDataPath + "/";
@@ -209,7 +207,7 @@ namespace TheAshBot
         }
 
         /// <summary>
-        /// This uses the enum to determain the file type.
+        /// This uses the enum to determine the file type.
         /// </summary>
         /// <param name="fileType">This is the FileType enum</param>
         /// <returns>the file type F.E. ".txt"</returns>
@@ -223,7 +221,7 @@ namespace TheAshBot
                     return ".json";
                 case FileType.Cs:
                     return ".cs";
-                case FileType.Costum:
+                case FileType.Custom:
                     return "";
                 default:
                     return ".txt";

@@ -9,8 +9,8 @@ namespace TheAshBot.UI
 
         #region Variables
 
-        [Header("If these are null then it will atomaticly try to find them")]
-        [SerializeField] private RectTransform dragRectTransfrom;
+        [Header("If these are null then it will automatically try to find them")]
+        [SerializeField] private RectTransform dragRectTransform;
         [SerializeField] private Canvas canvas;
 
 
@@ -23,23 +23,23 @@ namespace TheAshBot.UI
 
         private void Awake()
         {
-            if (dragRectTransfrom == null)
+            if (dragRectTransform == null)
             {
-                dragRectTransfrom = transform.parent.GetComponent<RectTransform>();
+                dragRectTransform = transform.parent.GetComponent<RectTransform>();
             }
 
             if (canvas == null)
             {
-                // Cycling though all parents untill it finds one with a canvus
-                Transform textCanvusTransfrom = transform.parent;
-                while (textCanvusTransfrom != null)
+                // Cycling though all parents until it finds one with a canvas
+                Transform textCanvasTransform = transform.parent;
+                while (textCanvasTransform != null)
                 {
-                    if (textCanvusTransfrom.TryGetComponent(out canvas))
+                    if (textCanvasTransform.TryGetComponent(out canvas))
                     {
                         break;
                     }
 
-                    textCanvusTransfrom = textCanvusTransfrom.parent;
+                    textCanvasTransform = textCanvasTransform.parent;
                 }
             }
         }
@@ -51,7 +51,7 @@ namespace TheAshBot.UI
 
         public void OnDrag(PointerEventData eventData)
         {
-            RectTransform canvasRectTransfrom = canvas.GetComponent<RectTransform>();
+            RectTransform canvasRectTransform = canvas.GetComponent<RectTransform>();
 
             Vector2 anchoredMouse = eventData.position / canvas.scaleFactor;
 
@@ -59,10 +59,10 @@ namespace TheAshBot.UI
             float padding = 64;
 
             // making sure it does not go to far off screen
-            if (anchoredPosition.x + padding > canvasRectTransfrom.rect.width)
+            if (anchoredPosition.x + padding > canvasRectTransform.rect.width)
             {
                 // Tooltip has left the screen on right side of the screen
-                anchoredPosition.x = canvasRectTransfrom.rect.width - padding;
+                anchoredPosition.x = canvasRectTransform.rect.width - padding;
             }
             else if (anchoredPosition.x - padding < 0)
             {
@@ -70,10 +70,10 @@ namespace TheAshBot.UI
                 anchoredPosition.x = padding;
             }
             
-            if (anchoredPosition.y + padding > canvasRectTransfrom.rect.height)
+            if (anchoredPosition.y + padding > canvasRectTransform.rect.height)
             {
                 // Tooltip has left the screen on top side of the screen
-                anchoredPosition.y = canvasRectTransfrom.rect.height - padding;
+                anchoredPosition.y = canvasRectTransform.rect.height - padding;
             }
             else if (anchoredPosition.y - padding < 0)
             {
@@ -82,21 +82,21 @@ namespace TheAshBot.UI
             }
 
 
-            dragRectTransfrom.anchoredPosition = anchoredPosition - mouseOffset;
+            dragRectTransform.anchoredPosition = anchoredPosition - mouseOffset;
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
             // Setting this on top
-            dragRectTransfrom.SetAsLastSibling();
+            dragRectTransform.SetAsLastSibling();
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            // getting the mouse position relitive to the position of the window.
+            // getting the mouse position relative to the position of the window.
             Vector2 anchoredMouse = eventData.position / canvas.scaleFactor;
 
-            mouseOffset = anchoredMouse - dragRectTransfrom.anchoredPosition;
+            mouseOffset = anchoredMouse - dragRectTransform.anchoredPosition;
         }
 
         #endregion

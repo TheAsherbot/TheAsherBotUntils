@@ -1,22 +1,22 @@
 using UnityEngine;
 
-namespace TheAshBot.TwoDimensional.TopDownCharcterMovement
+namespace TheAshBot.TwoDimensional.TopDownCharacterMovement
 {
-    public class TopDownCharcterMovement2D : MonoBehaviour
+    public class TopDownCharacterMovement2D : MonoBehaviour
     {
 
 
         public void AddMovementVelocity()
         {
-            gameObject.AddComponent<TopDownCharcterMovementVelocity2D>();
+            gameObject.AddComponent<TopDownCharacterMovementVelocity2D>();
         }
         public void AddMovementInput()
         {
-            gameObject.AddComponent<TopDownCharcterMovementInput2D>();
+            gameObject.AddComponent<TopDownCharacterMovementInput2D>();
         }
         public void AddMovementPosition()
         {
-            gameObject.AddComponent<TopDownCharcterMovementPosition2D>();
+            gameObject.AddComponent<TopDownCharacterMovementPosition2D>();
         }
 
 

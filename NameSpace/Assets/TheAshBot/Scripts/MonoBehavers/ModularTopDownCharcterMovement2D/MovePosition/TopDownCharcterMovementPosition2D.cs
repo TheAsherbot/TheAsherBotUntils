@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace TheAshBot.TwoDimensional.TopDownCharcterMovement
+namespace TheAshBot.TwoDimensional.TopDownCharacterMovement
 {
-    public class TopDownCharcterMovementPosition2D : MonoBehaviour, IMovePosition2D
+    public class TopDownCharacterMovementPosition2D : MonoBehaviour, IMovePosition2D
     {
 
 
@@ -57,8 +57,8 @@ namespace TheAshBot.TwoDimensional.TopDownCharcterMovement
         {
             if (!TryGetComponent(out IMoveVelocity2D moveVelocity))
             {
-                moveVelocity = gameObject.AddComponent<TopDownCharcterMovementVelocity2D>();
-                (moveVelocity as TopDownCharcterMovementVelocity2D).SetMovementSpeed(5);
+                moveVelocity = gameObject.AddComponent<TopDownCharacterMovementVelocity2D>();
+                (moveVelocity as TopDownCharacterMovementVelocity2D).SetMovementSpeed(5);
             }
 
             Vector3 moveDirection = (movePosition - transform.position).normalized;
@@ -67,7 +67,7 @@ namespace TheAshBot.TwoDimensional.TopDownCharcterMovement
 
             if (distanceToMovePosition > 0)
             {
-                Vector3 positionAfterMoving = transform.position + moveDirection * moveVelocity.GetMovementSpeed() * Time.deltaTime;
+                Vector3 positionAfterMoving = transform.position + (moveVelocity.GetMovementSpeed() * Time.deltaTime * moveDirection);
 
                 float distanceToMovePositionAfterMoving = Vector3.Distance(transform.position, positionAfterMoving);
 

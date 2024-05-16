@@ -32,13 +32,13 @@ public class PhysicsManager2D : MonoBehaviour
 
     [Header("Gravity")]
     [SerializeField] private bool useGravity = true;
-    [SerializeField] private float gravitySclae = -20;
+    [SerializeField] private float gravityScale = -20;
 
     private float gravity;
 
 
     [Header("Velocity")]
-    [SerializeField] public Vector2 velocity;
+    public Vector2 velocity;
 
 
     [Header("Drag")]
@@ -112,9 +112,14 @@ public class PhysicsManager2D : MonoBehaviour
         }
 
         // minVelocity
-        if (Mathf.Abs(velocity.x) < MIN_VELOCITY) velocity = new Vector2(0, velocity.y);
-        if (Mathf.Abs(velocity.y) < MIN_VELOCITY) velocity = new Vector2(velocity.x, 0);
-
+        if (Mathf.Abs(velocity.x) < MIN_VELOCITY)
+        {
+            velocity = new Vector2(0, velocity.y);
+        }
+        if (Mathf.Abs(velocity.y) < MIN_VELOCITY)
+        {
+            velocity = new Vector2(velocity.x, 0);
+        }
         DetectCollision();
 
     }
@@ -144,9 +149,9 @@ public class PhysicsManager2D : MonoBehaviour
 
     private void ApplyMovement()
     {
-        Vector2 horizontialVelocity = new Vector2(velocity.x, 0);
+        Vector2 horizontalVelocity = new Vector2(velocity.x, 0);
         Vector2 verticalVelocity = new Vector2(0, velocity.y);
-        movement = CollideAndSlide(horizontialVelocity * Time.deltaTime, transform.position, 0, false, horizontialVelocity * Time.deltaTime);
+        movement = CollideAndSlide(horizontalVelocity * Time.deltaTime, transform.position, 0, false, horizontalVelocity * Time.deltaTime);
         movement += CollideAndSlide(verticalVelocity * Time.deltaTime, transform.position + movement, 0, true, verticalVelocity * Time.deltaTime);
         
         transform.position += movement;
@@ -205,7 +210,7 @@ public class PhysicsManager2D : MonoBehaviour
         }
         else
         {
-            this.Log("your collider is not a suported collider type.");
+            this.Log("your collider is not a supported collider type.");
         }
 
         collisionList.Remove(collider);
@@ -242,12 +247,12 @@ public class PhysicsManager2D : MonoBehaviour
 
         float distance = velocity.magnitude + skinWidth;
 
-        RaycastHit2D raycastHit = Physics2D.CircleCast(position, bounds.extents.x, velocity.normalized, distance, collidableLayers);
-        if (raycastHit.transform != null)
+        RaycastHit2D rayCastHit = Physics2D.CircleCast(position, bounds.extents.x, velocity.normalized, distance, collidableLayers);
+        if (rayCastHit.transform != null)
         {
-            Vector3 snapToSurface = velocity.normalized * (raycastHit.distance - skinWidth);
+            Vector3 snapToSurface = velocity.normalized * (rayCastHit.distance - skinWidth);
             Vector3 leftover = velocity - snapToSurface;
-            float angle = Vector3.Angle(Vector3.up, raycastHit.normal);
+            float angle = Vector3.Angle(Vector3.up, rayCastHit.normal);
 
             if (snapToSurface.magnitude <= skinWidth)
             {
@@ -261,21 +266,21 @@ public class PhysicsManager2D : MonoBehaviour
                 {
                     return snapToSurface;
                 }
-                leftover = ProjectAndScale(leftover, raycastHit.normal);
+                leftover = ProjectAndScale(leftover, rayCastHit.normal);
             }
             // Wall or Steep slope
             else
             {
                 // 3D
-                float scale = 1 - Vector3.Dot(new Vector3(raycastHit.normal.x, 0/*, raycastHit.normal.z*/).normalized, -new Vector3(initialVelocity.x, 0 , initialVelocity.z).normalized);
+                float scale = 1 - Vector3.Dot(new Vector3(rayCastHit.normal.x, 0/*, rayCastHit.normal.z*/).normalized, -new Vector3(initialVelocity.x, 0 , initialVelocity.z).normalized);
 
                 if (isGrounded && !gravityPass)
                 {
-                    leftover = ProjectAndScale(new Vector3(leftover.x, 0, leftover.z), new Vector3(raycastHit.normal.x, 0/*, raycastHit.normal.z*/));
+                    leftover = ProjectAndScale(new Vector3(leftover.x, 0, leftover.z), new Vector3(rayCastHit.normal.x, 0/*, rayCastHit.normal.z*/));
                 }
                 else
                 {
-                    leftover = ProjectAndScale(leftover, raycastHit.normal) * scale;
+                    leftover = ProjectAndScale(leftover, rayCastHit.normal) * scale;
                 }
             }
 
@@ -301,7 +306,7 @@ public class PhysicsManager2D : MonoBehaviour
     {
         if (!IsGrounded())
         {
-            gravity += gravitySclae * Time.deltaTime * Time.deltaTime;
+            gravity += gravityScale * Time.deltaTime * Time.deltaTime;
             velocity += Vector2.up * gravity;
         }
 
@@ -334,9 +339,9 @@ public class PhysicsManager2D : MonoBehaviour
 
         isGroundedLast = isGrounded;
 
-        RaycastHit2D raycastHit = Physics2D.BoxCast(transform.position - new Vector3(0, yOffset - 0.0f), new Vector2(groundCheckWidth * 2, 0.001f), 0, Vector2.down, boxCastDistance, groundLayer);
+        RaycastHit2D rayCastHit = Physics2D.BoxCast(transform.position - new Vector3(0, yOffset - 0.0f), new Vector2(groundCheckWidth * 2, 0.001f), 0, Vector2.down, boxCastDistance, groundLayer);
 
-        isGrounded = raycastHit.transform != null;
+        isGrounded = rayCastHit.transform != null;
         hadCheckedIsGroundedThisFrame = true;
 
 #if UNITY_EDITOR
@@ -344,9 +349,9 @@ public class PhysicsManager2D : MonoBehaviour
         {
             Color rayColor = isGrounded ? Color.green : Color.red;
 
-            Debug.DrawRay(transform.position + new Vector3(groundCheckWidth, 0), Vector2.down * (yOffset / 2 + boxCastDistance), rayColor);
-            Debug.DrawRay(transform.position - new Vector3(groundCheckWidth, 0), Vector2.down * (yOffset / 2 + boxCastDistance), rayColor);
-            Debug.DrawRay(transform.position - new Vector3(groundCheckWidth, yOffset + boxCastDistance), Vector2.right * groundCheckWidth * 2, rayColor);
+            Debug.DrawRay(transform.position + new Vector3(groundCheckWidth, 0), Vector2.down * ((yOffset / 2) + boxCastDistance), rayColor);
+            Debug.DrawRay(transform.position - new Vector3(groundCheckWidth, 0), Vector2.down * ((yOffset / 2) + boxCastDistance), rayColor);
+            Debug.DrawRay(transform.position - new Vector3(groundCheckWidth, yOffset + boxCastDistance), 2 * groundCheckWidth * Vector2.right, rayColor);
         }
 #endif
     }

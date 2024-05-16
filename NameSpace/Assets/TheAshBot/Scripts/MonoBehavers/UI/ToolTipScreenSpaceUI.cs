@@ -9,10 +9,10 @@ using UnityEngine.InputSystem;
 
 namespace TheAshBot.UI
 {
-    public class TooltopScreenSpaceUI : MonoBehaviour
+    public class ToolTipScreenSpaceUI : MonoBehaviour
     {
 
-        public static TooltopScreenSpaceUI Instance
+        public static ToolTipScreenSpaceUI Instance
         {
             get;
             private set;
@@ -24,8 +24,8 @@ namespace TheAshBot.UI
         private Func<string> getTooltipTextFunc;
 
 
-        [SerializeField] private RectTransform canvasRectTransfrom;
-        [SerializeField] private RectTransform backgroundRectTransfrom;
+        [SerializeField] private RectTransform canvasRectTransform;
+        [SerializeField] private RectTransform backgroundRectTransform;
         [SerializeField] private TextMeshProUGUI textMeshPro;
 
         private RectTransform rectTransform;
@@ -35,7 +35,7 @@ namespace TheAshBot.UI
         {
             if (Instance != null)
             {
-                this.LogError("There is more than one instance of the TooltopScreenSpaceUI Class!!! this should NEVER happen!");
+                this.LogError("There is more than one instance of the ToolTipScreenSpaceUI Class!!! this should NEVER happen!");
                 Destroy(this);
                 return;
             }
@@ -55,17 +55,17 @@ namespace TheAshBot.UI
             }
 
 #if ENABLE_INPUT_SYSTEM
-            Vector2 anchoredPosition = Mouse.current.position.ReadValue() / canvasRectTransfrom.localScale.x; // x, y, or z will work here becouse all of them will be the same.
+            Vector2 anchoredPosition = Mouse.current.position.ReadValue() / canvasRectTransform.localScale.x; // x, y, or z will work here because all of them will be the same.
 #elif !ENABLE_INPUT_SYSTEM
             Vector2 anchoredPosition = Input.mousePosition / canvasRectTransfrom.localScale.x; // x, y, or z will work here becouse all of them will be the same.
 #else
             return;
 #endif
 
-            if (anchoredPosition.x + backgroundRectTransfrom.rect.width > canvasRectTransfrom.rect.width)
+            if (anchoredPosition.x + backgroundRectTransform.rect.width > canvasRectTransform.rect.width)
             {
                 // Tooltip has left the screen on right side of the screen
-                anchoredPosition.x = canvasRectTransfrom.rect.width - backgroundRectTransfrom.rect.width;
+                anchoredPosition.x = canvasRectTransform.rect.width - backgroundRectTransform.rect.width;
             }
             else if (anchoredPosition.x < 0)
             {
@@ -73,10 +73,10 @@ namespace TheAshBot.UI
                 anchoredPosition.x = 0;
             }
 
-            if (anchoredPosition.y + backgroundRectTransfrom.rect.height > canvasRectTransfrom.rect.height)
+            if (anchoredPosition.y + backgroundRectTransform.rect.height > canvasRectTransform.rect.height)
             {
                 // Tooltip has left the screen on top side of the screen
-                anchoredPosition.y = canvasRectTransfrom.rect.height - backgroundRectTransfrom.rect.height;
+                anchoredPosition.y = canvasRectTransform.rect.height - backgroundRectTransform.rect.height;
             }
             else if (anchoredPosition.y < 0)
             {
@@ -97,12 +97,15 @@ namespace TheAshBot.UI
 
             Vector2 textSize = textMeshPro.GetRenderedValues(false);
 
-            backgroundRectTransfrom.sizeDelta = textSize;
+            backgroundRectTransform.sizeDelta = textSize;
         }
 
         private void Show(string tooltipText)
         {
-            if (tooltipText == null || tooltipText == string.Empty || tooltipText == "") return;
+            if (tooltipText == null || tooltipText == string.Empty || tooltipText == "")
+            {
+                return;
+            }
 
             useGetTooltipFunc = false;
             gameObject.SetActive(true);
@@ -129,7 +132,7 @@ namespace TheAshBot.UI
 
 
         /// <summary>
-        /// will show the toottip
+        /// will show the tool tip
         /// </summary>
         /// <param name="tooltipText"></param>
         public static void ShowTooltip(string tooltipText)
@@ -137,17 +140,17 @@ namespace TheAshBot.UI
             Instance.Show(tooltipText);
         }
         /// <summary>
-        /// will show the toottip
+        /// will show the tool tip
         /// </summary>
-        /// <param name="OnTooltipChanged">when triggerd the tooltip will change to the disierd text</param>
+        /// <param name="OnTooltipChanged">when triggered the tooltip will change to the desired text</param>
         public static void ShowTooltip(out Action<string> OnTooltipChanged)
         {
             Instance.Show(out OnTooltipChanged);
         }
         /// <summary>
-        /// will show the toottip
+        /// will show the toot tip
         /// </summary>
-        /// <param name="getTooltipTextFunc">Called every frame. it will allow you to chnage the tooltip text to what ever you would like very frame.</param>
+        /// <param name="getTooltipTextFunc">called every frame. it will allow you to change the tooltip text to what ever you would like very frame.</param>
         public static void ShowTooltip(Func<string> getTooltipTextFunc)
         {
             Instance.Show(getTooltipTextFunc);

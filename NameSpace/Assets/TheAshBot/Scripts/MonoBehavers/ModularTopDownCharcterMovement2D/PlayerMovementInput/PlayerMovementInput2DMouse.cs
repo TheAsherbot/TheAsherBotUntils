@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TheAshBot.TwoDimensional.TopDownCharcterMovement
+namespace TheAshBot.TwoDimensional.TopDownCharacterMovement
 {
     [RequireComponent(typeof(IMovePosition2D))]
     public class PlayerMovementInput2DMouse : MonoBehaviour

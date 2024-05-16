@@ -17,9 +17,9 @@ namespace TheAshBot.TwoDimensional.Grids
         /// This makes a grid that each cell holds a generic value
         /// </summary>
         /// <param name="width">This is the width of the grid</param>
-        /// <param name="height">This is the hight of the grid</param>
+        /// <param name="height">This is the height of the grid</param>
         /// <param name="cellSize">This is how big the grid objects are</param>
-        /// <param name="originPosition">This is the position of the bottum left grid object(AKA the origin)</param>
+        /// <param name="originPosition">This is the position of the bottom left grid object(AKA the origin)</param>
         /// <param name="defaultGridObject">This is the the value that all the gid object will default to<code>(GenericGrid grid, int x, int y) => new TGridObject(grid, x, y)</code></param>
         /// <param name="showDebug">If this is true the it will show the lines of the grid</param>
         /// <param name="parent">This is the parent object of the text(This is only needed if show debug is true)</param>
@@ -59,9 +59,9 @@ namespace TheAshBot.TwoDimensional.Grids
         /// This makes a grid that each cell holds a generic value
         /// </summary>
         /// <param name="width">This is the width of the grid</param>
-        /// <param name="height">This is the hight of the grid</param>
+        /// <param name="height">This is the height of the grid</param>
         /// <param name="cellSize">This is how big the grid objects are</param>
-        /// <param name="originPosition">This is the position of the bottum left grid object(AKA the origin)</param>
+        /// <param name="originPosition">This is the position of the bottom left grid object(AKA the origin)</param>
         /// <param name="defaultGridObject">This is the the value that all the gid object will default to<code>(GenericGrid grid, int x, int y) => new TGridObject(grid, x, y)</code></param>
         public GenericHexGrid2D(int width, int height, float cellSize, Vector2 originPosition, Func<GenericHexGrid2D<TGridObject>, int, int, TGridObject> defaultGridObject)
                          : base(width, height, cellSize, originPosition)
@@ -99,19 +99,18 @@ namespace TheAshBot.TwoDimensional.Grids
             }
         }
         /// <summary>
-        /// This sets the vaue of a cell using it's world position
+        /// This sets the value of a cell using it's world position
         /// </summary>
         /// <param name="worldPosition">This is the grid objects world position</param>
         /// <param name="value">This is the value it is being set to</param>
         public void SetGridObject(Vector2 worldPosition, TGridObject value)
         {
-            int x, y;
-            GetXY(worldPosition, out x, out y);
+            GetXY(worldPosition, out int x, out int y);
             SetGridObject(x, y, value);
         }
 
         /// <summary>
-        /// This gets the value of a cell using it's positon on the grid
+        /// This gets the value of a cell using it's position on the grid
         /// </summary>
         /// <param name="x">This is the number of grid objects to the right of the start grid object</param>
         /// <param name="y">This is the number of grid objects above the start grid object</param>
@@ -128,14 +127,13 @@ namespace TheAshBot.TwoDimensional.Grids
             }
         }
         /// <summary>
-        /// This gets the value of a cell using it's world position
+        /// the value of a cell using it's world position
         /// </summary>
-        /// <param name="worldPosition">This is the grid objects world position</param>
-        /// <returns>This ruterns the grid object</returns>
+        /// <param name="worldPosition">the grid objects world position</param>
+        /// <returns>the grid object</returns>
         public TGridObject GetGridObject(Vector2 worldPosition)
         {
-            int x, y;
-            GetXY(worldPosition, out x, out y);
+            GetXY(worldPosition, out int x, out int y);
             return GetGridObject(x, y);
         }
 

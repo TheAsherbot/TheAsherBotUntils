@@ -5,7 +5,7 @@ namespace TheAshBot
 
 
         /// <summary>
-        /// is the delages used for all the on tick events
+        /// is the delegates used for all the on tick events
         /// </summary>
         /// <param name="tick">this is the number of ticks that have happened</param>
         public delegate void OnTickEventArgs(int tick);
@@ -33,7 +33,7 @@ namespace TheAshBot
 
 
         /// <summary>
-        /// is the number of ticks that will happen per second. even if you were to change this constant in run time; you would not change how fast the ticks go becouse it is caculated once at the bigining.
+        /// is the number of ticks that will happen per second. even if you were to change this constant in run time; you would not change how fast the ticks go because it is calculated once at the beginning.
         /// </summary>
         private const float TICKS_PER_SECOND = 5f;
 
@@ -49,7 +49,10 @@ namespace TheAshBot
         public static void CreateIfNeeded()
         {
             // if it is already ticking then stop the function right here.
-            if (isTicking) return;
+            if (isTicking)
+            {
+                return;
+            }
 
             // if it is not yet ticking then it will make a timer loop that will make the tick go up by one. 
             FunctionTimer.Create(1 / TICKS_PER_SECOND, 0, (FunctionTimer functionTimer) =>

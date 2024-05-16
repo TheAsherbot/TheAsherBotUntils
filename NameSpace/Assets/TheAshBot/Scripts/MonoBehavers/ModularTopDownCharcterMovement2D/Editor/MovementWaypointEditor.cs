@@ -4,7 +4,7 @@ using UnityEditor;
 
 using UnityEngine;
 
-namespace TheAshBot.TwoDimensional.TopDownCharcterMovement.Editors
+namespace TheAshBot.TwoDimensional.TopDownCharacterMovement.Editors
 {
     [CustomEditor(typeof(MovementWaypoints))]
     public class MovementWaypointEditor : Editor
@@ -14,7 +14,10 @@ namespace TheAshBot.TwoDimensional.TopDownCharcterMovement.Editors
         {
             MovementWaypoints movementWaypoints = target as MovementWaypoints;
 
-            if (movementWaypoints.waypointArray == null) return;
+            if (movementWaypoints.waypointArray == null)
+            {
+                return;
+            }
 
             for (int i = 0; i < movementWaypoints.waypointArray.Length; i++)
             {

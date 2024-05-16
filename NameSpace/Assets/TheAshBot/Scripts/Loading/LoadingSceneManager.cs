@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-namespace TheAshBot.SceenManagment
+namespace TheAshBot.SceneManagement
 {
     public class LoadingSceneManager : MonoBehaviour
     {

@@ -6,12 +6,14 @@ namespace TheAshBot
 {
     public static class Logger
     {
+        private const string ObjectNameColor = "lightblue";
+
         /// <summary>
-        /// This will add the color atrabute to a string. (This will only color things that use unity's rich text).
+        /// This will add the color attribute to a string. (This will only color things that use unity's rich text).
         /// </summary>
         /// <param name="_string">This is the string that is going to be colored.</param>
         /// <param name="color">This is the color that it is going to be colored to.</param>
-        /// <returns>The string with the color atrabute added to it.</returns>
+        /// <returns>The string with the color attribute added to it.</returns>
         public static string Color(this string _string, string color)
         {
             return "<color=" + color + ">" + _string + "</color>";
@@ -21,7 +23,7 @@ namespace TheAshBot
         /// </summary>
         /// <param name="_string">is the string that is going to be sized.</param>
         /// <param name="size">is the size of the font.</param>
-        /// <returns>teh sting with the size atabute before and after the string.</returns>
+        /// <returns>the sting with the size attribute before and after the string.</returns>
         public static string Size(this string _string, int size)
         {
             return "<size=" + size + ">" + _string + "</size>";
@@ -39,20 +41,20 @@ namespace TheAshBot
 
 
         /// <summary>
-        /// will log a massage, and when you click on it it will bring you to the game object that loged it.
+        /// will log a massage, and when you click on it it will bring you to the game object that logged it.
         /// </summary>
         /// <param name="_Object"> is the object that is logging the message</param>
-        /// <param name="message">are the messages that will be loged.</param>
+        /// <param name="message">are the messages that will be logged.</param>
         public static void Log(this UnityEngine.Object _Object, params object[] message)
         {
             LogBase(Debug.Log, "<size=14>", _Object, "</size>", message);
         }
 
         /// <summary>
-        /// will log a message that have atrabutes to single that there was a secsess.
+        /// will log a message that have attributes to single that there was a success.
         /// </summary>
         /// <param name="_Object"> is the object that is logging the message</param>
-        /// <param name="message">are the messages that will be loged.</param>
+        /// <param name="message">are the messages that will be logged.</param>
         public static void LogSuccess(this UnityEngine.Object _Object, params object[] message)
         {
             LogBase(Debug.Log, "<size=14><color=green>", _Object, "</color></size>", message);
@@ -63,7 +65,7 @@ namespace TheAshBot
         /// will log an error massage
         /// </summary>
         /// <param name="_Object"> is the object that is logging the message</param>
-        /// <param name="message">are the messages that will be loged.</param>
+        /// <param name="message">are the messages that will be logged.</param>
         public static void LogError(this UnityEngine.Object _Object, params object[] message)
         {
             LogBase(Debug.LogError, "<color=red><b><size=16>!!!", _Object, "</size></b></color>", message);
@@ -73,7 +75,7 @@ namespace TheAshBot
         /// will log a message and make it look like an error.
         /// </summary>
         /// <param name="_Object"> is the object that is logging the message</param>
-        /// <param name="message">are the messages that will be loged.</param>
+        /// <param name="message">are the messages that will be logged.</param>
         public static void LogFakeError(this UnityEngine.Object _Object, params object[] message)
         {
             LogBase(Debug.Log, "<color=red><b><size=16>!!!", _Object, "</size></b></color>", message);
@@ -84,7 +86,7 @@ namespace TheAshBot
         /// will log a warning message
         /// </summary>
         /// <param name="_Object"> is the object that is logging the message</param>
-        /// <param name="message">are the messages that will be loged.</param>
+        /// <param name="message">are the messages that will be logged.</param>
         public static void LogWarning(this UnityEngine.Object _Object, params object[] message)
         {
             LogBase(Debug.LogWarning, "<color=yellow><size=16>", _Object, "</size></color>", message);
@@ -94,7 +96,7 @@ namespace TheAshBot
         /// will log a message and make it look like a warning
         /// </summary>
         /// <param name="_Object"> is the object that is logging the message</param>
-        /// <param name="message">are the messages that will be loged.</param>
+        /// <param name="message">are the messages that will be logged.</param>
         public static void LogFakeWarning(this UnityEngine.Object _Object, params object[] message)
         {
             LogBase(Debug.Log, "<color=yellow><size=16>", _Object, "</size></color>", message);
@@ -106,14 +108,14 @@ namespace TheAshBot
         /// This logs the massage to the console
         /// </summary>
         /// <param name="logFunction">This is the function used to log the message</param>
-        /// <param name="prefix">This is the prefix of the messgae</param>
-        /// <param name="_Object">This is the object that loged the message</param>
+        /// <param name="prefix">This is the prefix of the message</param>
+        /// <param name="_Object">This is the object that logged the message</param>
         /// <param name="suffix">this comes after the base message</param>
-        /// <param name="message">this is the messgaes loged</param>
+        /// <param name="message">this is the messages logged</param>
         private static void LogBase(Action<string, UnityEngine.Object> logFunction, string prefix, UnityEngine.Object _Object, string suffix = "", params object[] message)
         {
 #if UNITY_EDITOR
-            logFunction(prefix + _Object.name.Color("lightblue") + ": " + String.Join("; ", message) + suffix, _Object);
+            logFunction(prefix + _Object.name.Color(ObjectNameColor) + ": " + string.Join("; ", message) + suffix, _Object);
 #endif
         }
 

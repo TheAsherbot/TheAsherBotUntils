@@ -24,9 +24,9 @@ namespace TheAshBot.TwoDimensional.Grids
         /// This makes a grid that each cell holds a no value
         /// </summary>
         /// <param name="width">This is the width of the grid</param>
-        /// <param name="height">THis is the hight of the grid</param>
+        /// <param name="height">THis is the height of the grid</param>
         /// <param name="cellSize">This is how big the grid objects are</param>
-        /// <param name="originPosition">This is the position of the bottum left grid object(AKA the origin</param>
+        /// <param name="originPosition">This is the position of the bottom left grid object(AKA the origin</param>
         /// <param name="showDebug">If this is true the it will show the lines of the grid</param>
         /// <param name="parent">This si the parent object of the text(This is only needed if show debug is true)</param>
         public Grid2D(int width, int height, float cellSize, Vector2 originPosition, bool showDebug, Transform parent)
@@ -60,9 +60,9 @@ namespace TheAshBot.TwoDimensional.Grids
         /// This makes a grid that each cell holds a no value
         /// </summary>
         /// <param name="width">This is the width of the grid</param>
-        /// <param name="height">THis is the hight of the grid</param>
+        /// <param name="height">This is the height of the grid</param>
         /// <param name="cellSize">This is how big the grid objects are</param>
-        /// <param name="originPosition">This is the position of the bottum left grid object(AKA the origin</param>
+        /// <param name="originPosition">This is the position of the bottom left grid object(AKA the origin</param>
         public Grid2D(int width, int height, float cellSize, Vector2 originPosition)
         {
             this.width = width;
@@ -94,7 +94,7 @@ namespace TheAshBot.TwoDimensional.Grids
         /// <returns>The world position</returns>
         public Vector2 GetWorldPosition(int x, int y)
         {
-            return new Vector2(x, y) * cellSize + originPosition;
+            return (new Vector2(x, y) * cellSize) + originPosition;
         }
 
         /// <summary>

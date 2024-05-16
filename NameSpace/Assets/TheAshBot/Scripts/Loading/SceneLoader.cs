@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace TheAshBot.SceenManagment
+namespace TheAshBot.SceneManagement
 {
     public class SceneLoader
     {

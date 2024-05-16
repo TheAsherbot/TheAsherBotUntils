@@ -28,9 +28,9 @@ namespace TheAshBot.TwoDimensional.Grids
         /// This makes a grid that each cell holds a boolean value
         /// </summary>
         /// <param name="width">This is the width of the grid</param>
-        /// <param name="height">THis is the hight of the grid</param>
+        /// <param name="height">THis is the height of the grid</param>
         /// <param name="cellSize">This is how big the grid objects are</param>
-        /// <param name="originPosition">This is the position of the bottum left grid object(AKA the origin</param>
+        /// <param name="originPosition">This is the position of the bottom left grid object(AKA the origin</param>
         public HexGrid2D(int width, int height, float cellSize, Vector2 originPosition)
         {
             this.width = width;
@@ -63,10 +63,9 @@ namespace TheAshBot.TwoDimensional.Grids
         /// <returns>The world position</returns>
         public Vector2 GetWorldPosition(int x, int y)
         {
-            return 
-                new Vector2(x, 0) * cellSize + 
-                new Vector2(0, y) * cellSize * HEX_VERTICAL_OFFSET_MULTIPLIER + 
-                ((y % 2) == 1 ? new Vector2(1, 0) * cellSize * 0.5f : Vector2.zero) + 
+            return (new Vector2(x, 0) * cellSize) +
+                (cellSize * HEX_VERTICAL_OFFSET_MULTIPLIER * new Vector2(0, y)) +
+                ((y % 2) == 1 ? 0.5f * cellSize * new Vector2(1, 0) : Vector2.zero) +
                 originPosition;
         }
 
@@ -85,7 +84,7 @@ namespace TheAshBot.TwoDimensional.Grids
 
             bool isOddRow = roughY % 2 == 1;
 
-            List<Vector2Int> neighbourXYList = new List<Vector2Int>
+            List<Vector2Int> neighborXYList = new List<Vector2Int>
             {
                 roughXY + new Vector2Int(-1, 0),
                 roughXY + new Vector2Int(+1, 0),
@@ -99,12 +98,12 @@ namespace TheAshBot.TwoDimensional.Grids
 
             Vector2Int closestXY = roughXY;
 
-            foreach (Vector2Int neighbourXY in neighbourXYList)
+            foreach (Vector2Int neighborXY in neighborXYList)
             { 
-                if (Vector2.Distance(worldPosition, GetWorldPosition(neighbourXY.x, neighbourXY.y)) < Vector2.Distance(worldPosition, GetWorldPosition(closestXY.x, closestXY.y)))
+                if (Vector2.Distance(worldPosition, GetWorldPosition(neighborXY.x, neighborXY.y)) < Vector2.Distance(worldPosition, GetWorldPosition(closestXY.x, closestXY.y)))
                 {
-                    // neighbourXY is closer then closestXY
-                    closestXY = neighbourXY;
+                    // neighborXY is closer then closestXY
+                    closestXY = neighborXY;
                 }
             }
 
